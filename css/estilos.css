@@ -1,0 +1,17 @@
+body{
+	background: #f2f2f2;
+	font-size: 16px;
+}
+
+.barra-lateral{
+	background: #262a34;
+	color:#fff;
+	min-width: 300px;
+	min-height: 100vh;
+	padding: 0;
+}
+
+.barra-lateral a{
+	color: #fff;
+	
+}
