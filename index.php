@@ -143,7 +143,7 @@
               <i class="fa fa-car fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="service-heading">Lavado de Auto Sencillo</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            <!-- <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p> -->
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -151,7 +151,7 @@
               <i class="fa fa-car fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="service-heading">Lavado de Auto Normal</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            <!-- <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p> -->
           </div>
           <!-- <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -175,30 +175,49 @@
                     <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times</span></button>
                   </div>
                   <div class="modal-body">
-                    <form action="">
+                    <form action="" id="form_agendar">
                       <div class="form-gruop">
                         <div class="alert alert-warning" role="alert"><strong>Advertencia!</strong> Para poder agendar un servicio debe de registrarse primero.</div>
                       </div>
                       <div class="form-group">
-                        <label for="">Eleje el Servicio</label>
-                        <select class="form-control" name="servicio" id="">
-                          <option value="">Servicio1</option>
-                          <option value="">Servicio2</option>
-                          <option value="">Servicio3</option>
+                        <label for="">Elije el Servicio</label>
+                        <select class="form-control" name="servicio" id="servicio">
+                          <option value="Lavada de auto sencillo">Lavada de auto sencillo</option>
+                          <option value="Lavada de auto normal">Lavada de auto normal</option>
+                    
                         </select>
                       </div>
                       <div class="form-group">
-                        <input class="form-control" type="text" name="cedula" placeholder="Cedula *" maxlength="10">                     
+                        <input class="form-control" type="text" name="cedula_agendar" id="cedula_agendar" placeholder="Ingrese su número de Cedula *" maxlength="10" required="">                     
                       </div>
                       <div class="form-group">
-                        <input class="form-control" type="text" name="Nombres" placeholder="Cedula *" readonly="">                     
+                        <input class="form-control" type="text" name="Nombres" id="nombres_agendar" placeholder="Esperando..." readonly="">                   
+                      </div>
+                      <div id="message_agendar"></div>
+                      <div class="form-group">
+                        <label for="">Elije la fecha</label>
+                        <select class="form-control" name="fecha" id="fecha_agendar" disabled="disabled">
+                          <option value="no">Seleccione...</option>
+                         
+                        </select>
                       </div>
 
-                    </form>
+                      <div class="form-group">
+                        <label for="">Elije la hora</label>
+                        <select class="form-control" name="hora" id="hora_agendar">
+                         
+                        </select>
+                      </div>
+
+                      <div id="message_agenda_guardar" ></div>
+
+
                   </div>
                   <div class="modal-footer">
+                    <button class="btn btn-success" id="aceptar_agenda" disabled="disabled">Aceptar</button>
                     <button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                   </div>
+                    </form>
                 </div>
               </div>
               
@@ -347,11 +366,11 @@
 
         <div class="row text text-center">
           <div class="col">
-            <form action="" id="registro" style="border: 2px solid; padding: 35px; border-radius: 6px; background-image: url(img/formulariofondo.jpg)">
+            <form action="" id="registro" method="post" style="border: 2px solid; padding: 35px; border-radius: 6px; background-image: url(img/formulariofondo.jpg)">
               
               <div class="form-group">
                 <label for="cedula" class="text-white float-left" > Cedula</label>
-                <input class="form-control" type="text" id="cedula" name="cedularegistro" placeholder="Cedula *" maxlength="10" required minlength="10">
+                <input class="form-control numero" type="text" id="cedula" name="cedularegistro" placeholder="Cedula *" maxlength="10" required minlength="10">
                 <br>
                 <div class="row">
                   <div class="col-md-4">
@@ -362,27 +381,27 @@
               </div>
               <div class="form-group">
                 <label for="" class="text-white float-left" > Nombre</label>
-                <input class="form-control" type="text" name="nombreregistro" placeholder="Nombre *" required data-validation-required-message="Por favor ingrese su nombre." onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input class="form-control" type="text" name="nombreregistro" id="nombreregistro" placeholder="Nombre *" required data-validation-required-message="Por favor ingrese su nombre." onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label for="" class="text-white float-left" > Apellido</label>
-                <input class="form-control" type="text" name="apellidoregistro" placeholder="Apellido *" required data-validation-required-message="Por favor ingrese su apellido." onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input class="form-control" type="text" name="apellidoregistro" id="apellidoregistro" placeholder="Apellido *" required data-validation-required-message="Por favor ingrese su apellido." onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label for="" class="text-white float-left" > Dirección</label>
-                <input class="form-control" type="text" name="direccionregistro" placeholder="Direccion *" required data-validation-required-message="Por favor ingrese su Direccion." onkeyup="javascript:this.value=this.value.toUpperCase();">
+                <input class="form-control" type="text" name="direccionregistro" id="direccionregistro" placeholder="Direccion *" required data-validation-required-message="Por favor ingrese su Direccion." onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label for="" class="text-white float-left" > Teléfono</label>
-                <input class="form-control" type="text" name="telefonoregistro" placeholder="Telefono *" maxlength="10" required data-validation-required-message="Por favor ingrese su Teléfono.">
+                <input class="form-control numero" type="text" name="telefonoregistro" id="telefonoregistro" maxlength="10" minlength="10" placeholder="Telefono *" maxlength="10" required data-validation-required-message="Por favor ingrese su Teléfono.">
                     <p class="help-block text-danger"></p>
               </div>
               <div class="form-group">
                 <label for="" class="text-white float-left" > Email</label>
-                <input class="form-control" type="email" name="mailregistro" placeholder="Email *" required data-validation-required-message="Por favor ingrese su email.">
+                <input class="form-control" type="email" name="mailregistro"  id="mailregistro" placeholder="Email *" required data-validation-required-message="Por favor ingrese su email.">
                     <p class="help-block text-danger"></p>
               </div>
               <br>
@@ -540,7 +559,7 @@
                     <p class="help-block text-danger"></p>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" id="phone" type="tel" placeholder="Telefono *" required data-validation-required-message="Por favor su numero de telefono.">
+                    <input class="form-control numero" id="phone" type="tel" placeholder="Telefono *" required maxlength="10" data-validation-required-message="Por favor su numero de telefono.">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
@@ -821,6 +840,11 @@
     <!-- Custom scripts for this registro -->
     <script src="js/cedula.js"></script>
     <script src="js/registro.js"></script>
+
+    <!-- Custom scripts for this agendar -->
+    <script src="js/consulta_nombres.js"></script>
+    <script src="js/agendar.js"></script>
+    <script src="js/hora.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="js/agency.min.js"></script>
