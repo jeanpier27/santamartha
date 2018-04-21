@@ -104,3 +104,13 @@ CREATE TABLE tb_agenda (
   fecha timestamp,
   foreign key(id_clientes) references tb_clientes (id_clientes)
 );
+
+CREATE TABLE tb_usuarios (
+  id_usuarios int primary key AUTO_INCREMENT ,
+  nombres text,
+  cargo varchar(100),
+  usuario varchar(100),
+  password text,
+  acceso varchar(20),
+  estado varchar(10)
+);
