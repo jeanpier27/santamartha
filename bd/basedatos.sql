@@ -40,7 +40,7 @@ create table tb_proveedores(
   nombres varchar(100),
   telefono varchar(10),
   direccion varchar(100),
-  correo varchar(50)
+  correo varchar(50),
   observacion text
 );
 

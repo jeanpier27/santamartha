@@ -1,101 +1,34 @@
+<?php 
+date_default_timezone_set('America/Bogota');
+session_start();
+if(!isset($_SESSION['nombres'])){
+header('location:cerrar_sesion.php');
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<?php 
-	date_default_timezone_set('America/Bogota');
-	session_start();
-	if(!isset($_SESSION['nombres'])){
-		header('location:cerrar_sesion.php');
-	}
-
-	 ?>
 	<meta charset="UTF-8">
+	<?php require_once('meta.php'); ?>
 	<link href='css/fullcalendar.min.css' rel='stylesheet' />
 	<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-	<script src='js/moment.min.js'></script>
-	<script src='js/jquery.min.js'></script>
+	<script src='js/moment.min.js'></script>	
 	<script src='js/fullcalendar.min.js'></script>
 	<script src='js/locale-all.js'></script>
+  <script>
+    $(document).ready(function(){
+      $('.nav-item').removeClass('active');
+      $('#inicio').addClass('active');
+      
+    });
+  </script>
 	<title>Autoservicios Santa Martha</title>
-	<?php require_once('meta.php'); ?>
 </head>
 <body>
-	<!-- <div class="container-fluid">
-		<div class="row">
-			<div class="barra-lateral col-12 col-sm-auto">
-				<div class="logo">
-					<h2 style="color:#fed136; font-family: 'Kaushan Script', cursive;">Santa Martha</h2>
-				</div>				
-				<nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
-					<a href="#"><i class="fa fa-home" aria-hidden="true"></i><span>Inicio</span></a>					
-					<a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i><span>Compras</span></a>
-					<a href="#"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span>Ventas</span></a>
-					<a href="#"><i class="fa fa-user-o" aria-hidden="true"></i><span>Usuarios</span></a>
-					<a href="#"><i class="fa fa fa-folder-open-o" aria-hidden="true"></i><span>Reportes</span></a>
-					<a href="#"><i class="fa fa-cogs" aria-hidden="true"></i><span>Configuracion</span></a>
-				</nav>
-			</div>
-		</div>
-	</div> -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-	    <a class="navbar-brand" href="#" style="color:#fed136; font-family: 'Kaushan Script', cursive;">Santa Martha</a>
-	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="ml-1">Inicio</span><span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i><span class="ml-1">Compras</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="ml-1">Ventas</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#"><i class="fa fa fa-folder-open-o" aria-hidden="true"></i><span class="ml-1">Reportes</span></a>
-	      </li>
-	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          <i class="fa fa-cogs" aria-hidden="true"></i><span class="ml-1">Configuración</span>
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	          <a class="dropdown-item" href="#">Action</a>
-	          <a class="dropdown-item" href="#">Another action</a>
-	          <a class="dropdown-item" href="#">Something else here</a>
-	        </div>
-	      </li>
-	    </ul>
-	    <!-- <form class="form-inline my-2 my-lg-0"> -->
-	      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-	      <h6 class="mr-2" style="color:#fed136;">Bienvenido: <?php echo $_SESSION['nombres']; ?></h6>
-	      <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#salir">Salir</button>
-	    <!-- </form> -->
-	    <!-- modal salir -->
-	    <div class="modal fade" id="salir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Sistema Santa Martha</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <h1>Esta seguro de salir del sistema?</h1>
-		      </div>
-		      <div class="modal-footer">
-		        <!-- <button type="button" class="btn btn-danger">Salir</button> -->
-		        <a href="cerrar_sesion.php" class="btn btn-outline-info">Aceptar</a>
-		        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	  </div>
-	</nav>
-	<div class="container mt-5" style="background: #fff">
+
+	<?php require_once('menu.php'); ?>
+	<div style="width: 1px; height: 80px;"></div>
+	<div class="container" style="background: #fff; border-radius: 20px;">
 		<h1><center>AGENDA</center></h1>
 		<div class="mt-2" id="calendar"></div>		
 	</div>
