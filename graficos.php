@@ -46,7 +46,7 @@ header('location:cerrar_sesion.php');
       Highcharts.chart('container_line', {
 
           title: {
-            text: 'Solar Employment Growth by Sector, 2010-2016'
+            text: 'Titulo'
           },
 
           subtitle: {
@@ -115,7 +115,7 @@ header('location:cerrar_sesion.php');
               type: 'pie'
           },
           title: {
-              text: 'Browser market shares January, 2015 to May, 2015'
+              text: 'Titulo'
           },
           tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

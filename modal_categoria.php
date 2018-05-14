@@ -12,7 +12,7 @@
                     <div class="form-group">
                       <label for="">Categoria</label>
                       <input name="id" type="hidden" value="<?php echo $resp['id_categoria'] ?>">
-                      <input name="categoria" class="form-control" type="text" required="" " value="<?php echo $resp['cedula_ruc'] ?>">
+                      <input name="categoria" class="form-control" type="text" required="" " value="<?php echo $resp['categoria'] ?>">
                     </div>
                     
                     <div id="message_edicion"></div>
@@ -31,17 +31,13 @@
 <?php 
   if(isset($_POST['editar_c'])){
     $id=$_POST['id'];
-    $ruc=$_POST['ruc'];
-    $nombres=$_POST['nombres'];
-    $telefono=$_POST['telefono'];
-    $direccion=$_POST['direccion'];
-    $correo=$_POST['correo'];
+    $ruc=$_POST['categoria'];
 
-    $resp=$conexion->query("update tb_proveedores set cedula_ruc='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',correo='".$correo."' where id_proveedores=".$id);
+    $resp=$conexion->query("update tb_categoria set categoria='".$ruc."' where id_categoria=".$id);
     if($resp){
-      echo("<script>alert('Feriado editado con exito');location.href = 'proveedores.php';</script>");
+      echo("<script>alert('Categoria editada con exito');location.href = 'productos.php';</script>");
     }else{
-      echo("<script>alert('No se edito feriado')</script>");
+      echo("<script>alert('No se edito categoria')</script>");
     }
 
   }

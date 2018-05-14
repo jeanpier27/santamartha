@@ -44,14 +44,18 @@ header('location:cerrar_sesion.php');
               </div>
               <div class="modal-body">
                 <div class="form-group">
+                  <form action="" id="frm_categoria">
+                    
                   <label for="">Categoria</label>
-                  <input class="form-control" type="text" name="categoria">                  
+                  <input class="form-control" type="text" name="categoria" id="new_categoria">                  
                 </div>
               </div>
               <div class="modal-footer">
                 <a href="productos.php" class="btn btn-danger">Cerrar</a>
-                <button type="submit" class="btn btn-primary" disabled id="guardar_c">Guardar</button>
+                <button type="submit" class="btn btn-primary" id="guardar_c">Guardar</button>
+                <div id="message_categoria"></div>
               </div>
+                  </form>
             </div>
           </div>
         </div>

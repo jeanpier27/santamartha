@@ -114,3 +114,10 @@ CREATE TABLE tb_usuarios (
   acceso varchar(20),
   estado varchar(10)
 );
+
+CREATE TABLE tb_promocion (
+  id_promocion int primary key AUTO_INCREMENT ,
+  imagen text,
+  titulo varchar(100),
+  descripcion varchar(100)
+);

@@ -102,18 +102,27 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
+            <?php 
+              require_once('conexion.php');
+              $imga=$conexion->query("select imagen from tb_promocion");
+              // $res_img=mysqli_fetch_array($imga);
+              while($res_img=mysqli_fetch_array($imga)){
+                $a=$a.','.$res_img['imagen'];
+              }
+              list($b,$promo1,$promo2,$promo3) = explode(',', $a);              
+             ?>
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <!-- <img class="d-block w-100" src="http://lorempixel.com/800/400" alt="First slide"> -->
-                <img class="d-block" src="http://i.imgur.com/JP47Lmo.png" alt="First slide">
+                <img class="d-block" src="<?php echo $promo1; ?>" alt="First slide">
               </div>
               <div class="carousel-item">
                 <!-- <img class="d-block w-100" src="http://lorempixel.com/800/400/people" alt="Second slide"> -->
-                <img class="d-block" src="https://s-media-cache-ak0.pinimg.com/originals/51/49/24/514924b8ca790377fdc43473d71d5282.jpg" alt="Second slide">
+                <img class="d-block" src="<?php echo $promo2; ?>" alt="Second slide">
               </div>
               <div class="carousel-item">
                 <!-- <img class="d-block w-100" src="http://lorempixel.com/800/400/nature" alt="Third slide"> -->
-                <img class="d-block" src="https://i.ytimg.com/vi/5nzt2A4oRbw/hqdefault.jpg" alt="Second slide">
+                <img class="d-block" src="<?php echo $promo3; ?>" alt="Second slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -45,7 +45,7 @@
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	          <a class="dropdown-item" href="productos.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Productos</span></a>
-	          <a class="dropdown-item" href="#"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Promociones</span></a>
+	          <a class="dropdown-item" href="promociones.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Promociones</span></a>
 	          <a class="dropdown-item" href="proveedores.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Proveedores</span></a>
 	        </div>
 	      </li>
