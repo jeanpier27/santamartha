@@ -29,7 +29,7 @@ header('location:cerrar_sesion.php');
     <div class="row">
       <div class="col-md-6">
         <center><h1>CATEGORIA</h1></center>
-        <div class="col">
+        <div class="col mb-2">
           <button class="btn btn-success" data-toggle="modal" data-target="#agregar_c" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
         </div>
         <div class="col"></div>
@@ -66,8 +66,8 @@ header('location:cerrar_sesion.php');
 
                   <!-- <th hidden="">Id_estudiante</th> -->
                   <th>Id</th>
-                  <th>Categoria</th>
-                  <th></th>
+                  <th width="250">Categoria</th>
+                  <th>Editar</th>
                   
               </tr>
             </thead>                              
@@ -83,7 +83,7 @@ header('location:cerrar_sesion.php');
               <tr>
                 <td><?php echo $resp['id_categoria']; ?></td>
                 <td><?php echo $resp['categoria'] ?></td>
-                <td><span class="pull-right"><a data-toggle="modal" data-target="#editar_c<?php echo $resp['id_categoria']; ?>" href="#editar_c<?php echo $resp['id_categoria']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
+                <td class="text-center"><span class=""><a data-toggle="modal" data-target="#editar_c<?php echo $resp['id_categoria']; ?>" href="#editar_c<?php echo $resp['id_categoria']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
                 
               </tr>
               <?php 
@@ -96,9 +96,9 @@ header('location:cerrar_sesion.php');
         </div>
             
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-3">
         <center><h1>PRODUCTOS</h1></center>
-          <div class="col">
+          <div class="col mb-2">
             <button class="btn btn-success" data-toggle="modal" data-target="#agregar_p" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
           </div>
           <div class="col"></div>
@@ -161,7 +161,7 @@ header('location:cerrar_sesion.php');
                     <th>Precio</th>
                     <th>Estado</th>
 
-                    <th></th>
+                    <th>Editar</th>
                     
                 </tr>
               </thead>                              
@@ -181,7 +181,7 @@ header('location:cerrar_sesion.php');
                   <td><img src="<?php echo $resp['imagen'] ?>"  height="50px" alt=""></td>
                   <td><?php echo '$'.$resp['pvv'] ?></td>
                   <td><?php echo $resp['estado'] ?></td>
-                  <td><span class="pull-right"><a data-toggle="modal" data-target="#editar_p<?php echo $resp['id_producto']; ?>" href="#editar_p<?php echo $resp['id_producto']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
+                  <td class="text-center"><span class=""><a data-toggle="modal" data-target="#editar_p<?php echo $resp['id_producto']; ?>" href="#editar_p<?php echo $resp['id_producto']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
                   
                 </tr>
                 <?php 
