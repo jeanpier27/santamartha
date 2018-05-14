@@ -19,7 +19,7 @@
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                   <!-- <a href="proveedores.php" class="btn btn-danger">Cerrar</a> -->
                   <button type="submit" class="btn btn-primary" id="edit_provee" name="editar_c">Editar</button>
                 </div>

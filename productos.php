@@ -30,7 +30,7 @@ header('location:cerrar_sesion.php');
       <div class="col-md-6">
         <center><h1>CATEGORIA</h1></center>
         <div class="col">
-          <button class="btn btn-success" data-toggle="modal" data-target="#agregar_c"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+          <button class="btn btn-success" data-toggle="modal" data-target="#agregar_c" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
         </div>
         <div class="col"></div>
         <div class="modal fade" id="agregar_c" tabindex="-1" role="dialog" aria-labelledby="agregar_cLabel" aria-hidden="true">
@@ -38,9 +38,9 @@ header('location:cerrar_sesion.php');
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="agregar_cLabel">Agregar Categoria</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-                </button>
+                </button> -->
               </div>
               <div class="modal-body">
                 <div class="form-group">
@@ -49,11 +49,11 @@ header('location:cerrar_sesion.php');
                   <label for="">Categoria</label>
                   <input class="form-control" type="text" name="categoria" id="new_categoria">                  
                 </div>
+                <div id="message_categoria"></div>
               </div>
               <div class="modal-footer">
                 <a href="productos.php" class="btn btn-danger">Cerrar</a>
                 <button type="submit" class="btn btn-primary" id="guardar_c">Guardar</button>
-                <div id="message_categoria"></div>
               </div>
                   </form>
             </div>
@@ -99,7 +99,7 @@ header('location:cerrar_sesion.php');
       <div class="col-md-6">
         <center><h1>PRODUCTOS</h1></center>
           <div class="col">
-            <button class="btn btn-success" data-toggle="modal" data-target="#agregar_p"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#agregar_p" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
           </div>
           <div class="col"></div>
           <div class="modal fade" id="agregar_p" tabindex="-1" role="dialog" aria-labelledby="agregar_cLabel" aria-hidden="true">
@@ -107,34 +107,44 @@ header('location:cerrar_sesion.php');
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="agregar_cLabel">Agregar Producto</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                  </button> -->
                 </div>
+                <form action="" enctype="multipart/form-data" id="frm_producto" method="post">  
+
                 <div class="modal-body">
                   <div class="form-group">
                     <label for="">Categoria</label>
                     <select class="form-control" name="catego" id="">
-                      <option value="0">Seleccione</option>
-                    </select>
+                        <?php 
+                          $sql3=$conexion->query("select * from tb_categoria");
+                          while($sql2=mysqli_fetch_array($sql3)){
+                         ?>
+                         
+                        <option value="<?php echo $sql2['id_categoria']; ?>"><?php echo $sql2['categoria']; ?></option>
+                      <?php } ?>
+                      </select>
                   </div>
                   <div class="form-group">
                     <label for="">Producto</label>
-                    <input class="form-control" type="text" name="producto">                    
+                    <input class="form-control" type="text" required="" name="producto">                    
                   </div>
                   <div class="form-group">
                     <label for="">Subir Imagen</label>
-                    <input class="form-control" type="file" name="imagen">                    
+                    <input class="form-control" type="file" required="" name="new_imagen">                    
                   </div>
                   <div class="form-group">
                     <label for="">Precio Venta</label>
-                    <input class="form-control" type="text" name="precio">                    
+                    <input class="form-control" type="text" required="" name="precio">                    
                   </div>
                 </div>
+                <div id="message_producto"></div>
                 <div class="modal-footer">
                   <a href="productos.php" class="btn btn-danger">Cerrar</a>
-                  <button type="submit" class="btn btn-primary" disabled id="guardar_p">Guardar</button>
+                  <button type="submit" class="btn btn-primary" id="guardar_p">Guardar</button>
                 </div>
+              </form>
               </div>
             </div>
           </div>
@@ -190,6 +200,8 @@ header('location:cerrar_sesion.php');
       </div>
     </div>
 	</div>
+  <script src="js/categoria.js"></script>
+  <script src="js/productos.js"></script>
   <script>
     $(document).ready(function(){
 

@@ -40,36 +40,42 @@ header('location:cerrar_sesion.php');
         <div class="form-control">
           <img class="" src="<?php echo $promo1; ?>" height="250px" width="300px" alt="">          
         </div>
-        <div class="form-group">
-          <input class="form-control" type="file" name="promocion1">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-success">Subir</button>
-        </div>
+        <form action="" id="promo1" enctype="multipart/form-data" method="post">          
+          <div class="form-group">
+            <input class="form-control" type="file" name="promocion1">
+          </div>
+          <div class="form-group">
+            <button type="submit" name="promo1" class="btn btn-success">Subir</button>
+          </div>
+        </form>
       </div>
       <div class="col-md-4">
         <h1>Promocion 2</h1>
         <div class="form-control">
           <img class="" src="<?php echo $promo2; ?>" height="250px" width="300px" alt="">          
         </div>
-        <div class="form-group">
-          <input class="form-control" type="file" name="promocion2">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-success">Subir</button>
-        </div>
+        <form action="" id="promo2" enctype="multipart/form-data" method="post">          
+          <div class="form-group">
+            <input class="form-control" type="file" name="promocion2">
+          </div>
+          <div class="form-group">
+            <button type="submit" name="promo2" class="btn btn-success">Subir</button>
+          </div>
+        </form>
       </div>
       <div class="col-md-4">
         <h1>Promocion 3</h1>
         <div class="form-control">
           <img class="" src="<?php echo $promo3; ?>" height="250px" width="300px" alt="">          
         </div>
-        <div class="form-group">
-          <input class="form-control" type="file" name="promocion3">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-success">Subir</button>
-        </div>
+        <form action="" id="promo3" enctype="multipart/form-data" method="post">          
+          <div class="form-group">
+            <input class="form-control" type="file" name="promocion3">
+          </div>
+          <div class="form-group">
+            <button type="submit" name="promo3" class="btn btn-success">Subir</button>
+          </div>
+        </form>
       </div>
     </div>
 	</div>
@@ -81,3 +87,38 @@ header('location:cerrar_sesion.php');
   </script>
 </body>
 </html>
+<?php 
+if(isset($_POST['promo1'])){
+$subir=$_FILES['promocion1']['tmp_name'];
+$imagen_url='img_promo/'.$_FILES['promocion1']['name'];
+$update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=1");
+if($update){
+        move_uploaded_file($subir, $imagen_url);
+        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+      }else{
+        echo("<script>alert('No se edito Promocion')</script>");
+      }
+}
+if(isset($_POST['promo2'])){
+$subir=$_FILES['promocion1']['tmp_name'];
+$imagen_url='img_promo/'.$_FILES['promocion1']['name'];
+$update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=2");
+if($update){
+        move_uploaded_file($subir, $imagen_url);
+        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+      }else{
+        echo("<script>alert('No se edito Promocion')</script>");
+      }
+if(isset($_POST['promo3'])){
+$subir=$_FILES['promocion1']['tmp_name'];
+$imagen_url='img_promo/'.$_FILES['promocion1']['name'];
+$update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=3");
+if($update){
+        move_uploaded_file($subir, $imagen_url);
+        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+      }else{
+        echo("<script>alert('No se edito Promocion')</script>");
+      }
+}
+}
+ ?>

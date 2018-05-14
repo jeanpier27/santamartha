@@ -250,30 +250,30 @@
 
         </div>
 
+
         <div class="row">
           <div class="col-md-4">
             <form action=""  >
-              <label for="">Categoria</label>
-              <select class="form-control" name="categoria" id="">
-                <option value="">Seleccione Categoria</option>
-                <option value="">Categoria1</option>
-                <option value="">Categoria2</option>
-                <option value="">Categoria3</option>
-                <option value="">Categoria4</option>
-              </select>
+               <label for="">Categoria</label>
+                    <select class="form-control" name="categoria" id="p_categoria">
+                      <option value="0">Seleccione...</option>
+                        <?php 
+                          $sql3=$conexion->query("select * from tb_categoria");
+                          while($sql2=mysqli_fetch_array($sql3)){
+                         ?>
+                         
+                        <option value="<?php echo $sql2['id_categoria']; ?>"><?php echo $sql2['categoria']; ?></option>
+                      <?php } ?>
+                      </select>
               <label for="">Producto</label>
-              <select class="form-control" name="producto" id="" style="padding-top: 3px;">
-                <option value="0">Seleccione Producto</option>
-                <option value="1">Producto1</option>
-                <option value="2">Producto2</option>
-                <option value="3">Producto3</option>
-                <option value="4">Producto4</option>
+              <select class="form-control" name="producto" id="p_producto" style="padding-top: 3px;">
+                
+                
               </select>
             </form>
           </div>
           <div class="col-md-8" >
             <div class="row" id="contenedorproducts" >
-              
             </div>
           </div>
         </div>
@@ -442,8 +442,8 @@
 
     <script type="text/javascript">
       $('select[name=producto]').change(function(){
-        var producto=$(this).val();
-        console.log(producto);
+        var producto=$("#p_producto").val();
+        // console.log(producto);
         
          $.post("consultaproducto.php",{producto:producto},function(data,status){                               
                 // console.log(data);
@@ -451,7 +451,23 @@
                 $('#contenedorproducts').html(data);  
         });
       });
+          $('#p_categoria').change(function(){
+            var categoria=$(this).val();
+            $.post("cargar_productos.php",{categoria:categoria},function(data,status){                               
+                // console.log(data);
+                // console.log(status);
+                $('#p_producto').html(data);  
+              });
+
+            $.post("consultaproducto.php",{categoria:categoria},function(data,status){                               
+                // console.log(data);
+                // console.log(status);
+                $('#contenedorproducts').html(data);  
+            });
+            
+          });
     </script>
+     
 
   </body>
 

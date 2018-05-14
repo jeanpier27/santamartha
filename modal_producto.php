@@ -6,13 +6,21 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                </div>
+                </div>                  
+                <form action="" enctype="multipart/form-data" id="editar_proveed" method="post">
                 <div class="modal-body">
-                  <form action="" id="editar_proveed" method="post">
                     <div class="form-group">
                       <label for="">Categoria</label>
                       <input name="id" type="hidden" value="<?php echo $resp['id_producto'] ?>">
-                      <input name="categoria" class="form-control" type="text" required="" value="<?php echo $resp['categoria'] ?>">
+                      <select class="form-control" name="categoria" id="">
+                        <?php 
+                          $sql=$conexion->query("select * from tb_categoria");
+                          while($sql1=mysqli_fetch_array($sql)){
+                         ?>
+                         
+                        <option value="<?php echo $sql1['id_categoria']; ?>" <?php if($sql1['id_categoria']==$resp['id_categoria']){echo "selected";} ?>><?php echo $sql1['categoria']; ?></option>
+                      <?php } ?>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="">Producto</label>
@@ -20,7 +28,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">Imagen</label>
-                      <input class="form-control" type="file" value="<?php echo $resp['imagen'] ?>">
+                      <input class="form-control" type="file" name="imagen" >
                     </div>
                     <div class="form-group">
                       <label for="">Precio</label>
@@ -31,7 +39,7 @@
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                   <!-- <a href="proveedores.php" class="btn btn-danger">Cerrar</a> -->
                   <button type="submit" class="btn btn-primary" id="edit_provee" name="editar_p">Editar</button>
                 </div>
@@ -42,18 +50,37 @@
         </div>
 <?php 
   if(isset($_POST['editar_p'])){
-    $id=$_POST['id'];
-    $ruc=$_POST['ruc'];
-    $nombres=$_POST['nombres'];
-    $telefono=$_POST['telefono'];
-    $direccion=$_POST['direccion'];
-    $correo=$_POST['correo'];
+    if($_FILES['imagen']['name']==""){
+       $id=$_POST['id'];
+      $categoria=$_POST['categoria'];
+      $producto=$_POST['producto'];
+      // $subir=$_FILES['imagen']['name'];
+      // $imagen_url='img_products/'.$_FILES['imagen']['tmp_name'];
+      $precio=$_POST['precio'];
 
-    $resp=$conexion->query("update tb_proveedores set cedula_ruc='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',correo='".$correo."' where id_proveedores=".$id);
-    if($resp){
-      echo("<script>alert('Feriado editado con exito');location.href = 'proveedores.php';</script>");
+      $resp=$conexion->query("update tb_producto set id_categoria='".$categoria."', producto='".$producto."',pvv='".$precio."' where id_producto=".$id);
+      if($resp){
+        // move_uploaded_file($subir, $imagen_url);
+        echo("<script>alert('Producto editado con exito');location.href = 'productos.php';</script>");
+      }else{
+        echo("<script>alert('No se edito producto')</script>");
+      }
     }else{
-      echo("<script>alert('No se edito feriado')</script>");
+      $id=$_POST['id'];
+      $categoria=$_POST['categoria'];
+      $producto=$_POST['producto'];
+      $subir=$_FILES['imagen']['tmp_name'];
+      $imagen_url='img_products/'.$_FILES['imagen']['name'];
+      $precio=$_POST['precio'];
+
+      $resp=$conexion->query("update tb_producto set id_categoria='".$categoria."', producto='".$producto."',imagen='".$imagen_url."',pvv='".$precio."' where id_producto=".$id);
+      if($resp){
+        move_uploaded_file($subir, $imagen_url);
+        echo("<script>alert('Producto editado con exito');location.href = 'productos.php';</script>");
+      }else{
+        echo("<script>alert('No se edito producto')</script>");
+      }
+
     }
 
   }
