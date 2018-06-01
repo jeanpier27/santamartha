@@ -7,3 +7,5 @@
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">	
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/estilos.css">
+	<script src="https://unpkg.com/sweetalert2@7.20.7/dist/sweetalert2.all.js"></script>
+	<link rel="icon" href="img/logo.ico">

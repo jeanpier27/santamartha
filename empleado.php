@@ -36,7 +36,7 @@ header('location:cerrar_sesion.php');
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Nuevo Empleado</h5>
                   <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button> -->
@@ -44,13 +44,21 @@ header('location:cerrar_sesion.php');
                 <div class="modal-body">
                   <form action="" id="proveed">
                     <div class="form-group">
-                      <label for="">RUC:</label>
-                      <input name="ruc" class="form-control" type="text" required="" minlength="13" maxlength="13">
+                      <label for="">Cedula:</label>
+                      <input name="ruc" class="form-control numero" type="text" required="" minlength="10" maxlength="10">
                     </div>
                     <div id="message_cedula"></div>
                     <div class="form-group">
                       <label for="">Nombres:</label>
                       <input name="nombres" class="form-control" type="text" required="">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Cargo:</label>
+                      <input name="cargo" class="form-control" type="text" required="">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Sueldo:</label>
+                      <input name="sueldo" class="form-control" type="text" required="">
                     </div>
                     <div class="form-group">
                       <label for="">Telefono:</label>
@@ -60,16 +68,12 @@ header('location:cerrar_sesion.php');
                       <label for="">Direccion:</label>
                       <input name="direccion" class="form-control" type="text" required="">
                     </div>
-                    <div class="form-group">
-                      <label for="">Correo:</label>
-                      <input name="correo" class="form-control" type="email" required="">
-                    </div>
                     <div id="message_ingreso"></div>
                   
                 </div>
                 <div class="modal-footer">
                   <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
-                  <a href="proveedores.php" class="btn btn-danger">Cerrar</a>
+                  <a href="empleado.php" class="btn btn-danger">Cerrar</a>
                   <button type="submit" class="btn btn-primary" disabled id="guardar_proveed">Guardar</button>
                 </div>
                 </form>
@@ -84,11 +88,12 @@ header('location:cerrar_sesion.php');
 
                   <!-- <th hidden="">Id_estudiante</th> -->
                   <th>Id</th>
-                  <th>Ruc</th>
+                  <th>Cedula</th>
                   <th>Nombres</th>
+                  <th>Cargo</th>
+                  <th>Sueldo</th>
                   <th>Telefono</th>
                   <th>Direccion</th> 
-                  <th>Correo</th>
                   <th>Editar</th>
                   <!-- <th>Observacion</th> -->
                   
@@ -99,22 +104,23 @@ header('location:cerrar_sesion.php');
               <?php 
                 require_once('conexion.php');
                
-                $mens=$conexion->query('select * from tb_proveedores ');
+                $mens=$conexion->query('select * from tb_empleado ');
                 
                 while($resp=mysqli_fetch_array($mens)){
                ?>
               <tr>
-                <td><?php echo $resp['id_proveedores']; ?></td>
-                <td><?php echo $resp['cedula_ruc'] ?></td>
+                <td><?php echo $resp['id_empleado']; ?></td>
+                <td><?php echo $resp['cedula'] ?></td>
                 <td><?php echo $resp['nombres'] ?></td>
+                <td><?php echo $resp['cargo'] ?></td>
+                <td><?php echo $resp['sueldo'] ?></td>
                 <td><?php echo $resp['telefono'] ?></td>
                 <td><?php echo $resp['direccion'] ?></td>
-                <td><?php echo $resp['correo'] ?></td>
-                <td><span class="pull-right"><a data-toggle="modal" data-target="#editar<?php echo $resp['id_proveedores']; ?>" href="#editar<?php echo $resp['id_proveedores']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
+                <td><span class="pull-right"><a data-toggle="modal" data-target="#editar<?php echo $resp['id_empleado']; ?>" href="#editar<?php echo $resp['id_empleado']; ?>" style="text-decoration: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a></span></td>
                 
               </tr>
               <?php 
-                  include('modal_proveedores.php');
+                  include('modal_empleado.php');
                 }
                ?>
             </tbody>
@@ -132,77 +138,6 @@ header('location:cerrar_sesion.php');
                     return ((key >= 48 && key <= 57) || (key==8) || (key==0)) 
                 });
 
-       $('#editar_proveedjj').submit(function(e){
-          e.preventDefault();
-          var form=$(this).serialize();
-          var boton=$('#edit_proveed');
-          // console.log(form);
-
-          $.ajax({
-                      url: "editar_proveedor.php",
-                      type: "POST",
-                      data: form,
-                      // cache: false,
-                      beforeSend: function(){
-                        boton.removeClass("btn-primary");
-                        boton.addClass("btn-warning");
-                        boton.html('Procesando....');
-                        // boton.attr('disabled',true);
-                        
-                      },
-                      success: function(data) {
-                        // Success message
-                        console.log(data);
-                        if (data==='error'){
-
-                          $('#message_ingreso').html("<div class='alert alert-warning'>");
-                          $('#message_ingreso > .alert-warning').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                          $('#message_ingreso > .alert-warning')
-                            .append("<strong>Ah ocurrido un problema :) </strong>");
-                          $('#message_ingreso > .alert-warning')
-                            .append('</div>');
-                          // clear all fields
-                          $('#proveed').trigger("reset");
-                          // limpiar_msg_cedula();
-                        }
-                        else{
-                          $('#message_ingreso').html("<div class='alert alert-success'>");
-                          $('#message_ingreso > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                          $('#message_ingreso > .alert-success').append($("<strong>").text("Editado con exito :)"));
-                          $('#message_ingreso > .alert-success').append('</div>');
-                          //clear all fields
-                          $('#proveed').trigger("reset");
-                          boton.removeClass("btn-warning");
-                          boton.addClass("btn-primary");
-                          boton.html('Guardar');
-
-                        }
-                      },
-                      error: function() {
-                        // Fail message
-                        $('#message_ingreso').html("<div class='alert alert-danger'>");
-                        $('#message_ingreso > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                          .append("</button>");
-                        $('#message_ingreso > .alert-danger').append($("<strong>").text("Lo sentimos :( ah ocurrido un problema. Intentalo de nuevo!"));
-                        $('#message_ingreso > .alert-danger').append('</div>');
-                        // limpiar_msg_cedula();
-                        //clear all fields
-                        $('#proveed').trigger("reset");
-                        // $('#contactForm').trigger("reset");
-                      },
-                      complete: function() {
-                        $('#proveed').trigger("reset");
-                        // setTimeout(function() {
-                        //   $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-                        // }, 1000);
-                      }
-                });
-
-
-       });
-
 
        $('#proveed').submit(function(e){
           e.preventDefault();
@@ -211,7 +146,7 @@ header('location:cerrar_sesion.php');
           // console.log(form);
 
           $.ajax({
-                      url: "ingreso_proveedor.php",
+                      url: "ingreso_empleado.php",
                       type: "POST",
                       data: form,
                       // cache: false,
@@ -284,11 +219,11 @@ header('location:cerrar_sesion.php');
                 }, 5000);
           }
 
-        if(ruc.length==13){
+        if(ruc.length==10){
           
         
         $.ajax({
-                      url: "proveed.php",
+                      url: "emple.php",
                       type: "POST",
                       data: {
                         ruc: ruc
@@ -306,7 +241,7 @@ header('location:cerrar_sesion.php');
                           $('#message_cedula > .alert-warning').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                             .append("</button>");
                           $('#message_cedula > .alert-warning')
-                            .append("<strong>Ya se encuentra registrado el proveedor :) </strong>");
+                            .append("<strong>Ya se encuentra registrado el empleado :) </strong>");
                           $('#message_cedula > .alert-warning')
                             .append('</div>');
                           // clear all fields
@@ -317,7 +252,7 @@ header('location:cerrar_sesion.php');
                           $('#message_cedula').html("<div class='alert alert-success'>");
                           $('#message_cedula > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                             .append("</button>");
-                          $('#message_cedula > .alert-success').append($("<strong>").text("Ruc valido :)"));
+                          $('#message_cedula > .alert-success').append($("<strong>").text("Ok :)"));
                           $('#message_cedula > .alert-success').append('</div>');
                           //clear all fields
                           limpiar_msg_cedula();
@@ -345,7 +280,7 @@ header('location:cerrar_sesion.php');
               $('#message_cedula').html("<div class='alert alert-danger'>");
                         $('#message_cedula > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                           .append("</button>");
-                        $('#message_cedula > .alert-danger').append($("<strong>").text("Error :( El ruc debe contener 13 números!"));
+                        $('#message_cedula > .alert-danger').append($("<strong>").text("Error :( La cedula debe contener 10 números!"));
                         $('#message_cedula > .alert-danger').append('</div>');
                         limpiar_msg_cedula();
             }

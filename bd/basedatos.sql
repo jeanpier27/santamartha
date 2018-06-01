@@ -44,6 +44,9 @@ create table tb_proveedores(
   observacion text
 );
 
+-- alter table tb_ventas agregar iva
+-- add iva float(10,2)
+
 create table tb_compras(
   id_compras int primary key AUTO_INCREMENT ,
   id_proveedores int,
@@ -52,6 +55,7 @@ create table tb_compras(
   fecha_ingreso timestamp,
   total float (10,2),
   observacion text,
+  iva float(10,2),
   foreign key(id_proveedores) references tb_proveedores (id_proveedores)
 );
 
@@ -61,28 +65,51 @@ create table tb_detalle_compras(
   id_producto int,
   cantidad int,  
   observacion text,
+  valor_c float(10,2),
   foreign key(id_compras) references tb_compras (id_compras),
   foreign key(id_producto) references tb_producto (id_producto)
 );
 
-create table tb_ventas(
-  id_ventas int primary key AUTO_INCREMENT ,
-  id_clientes int,
+create table tb_factura(
+  id_factura int primary key AUTO_INCREMENT ,
   numero_fact int,
-  fecha_venta datetime,
-  total float (10,2),
+  fecha date,
+  id_clientes int,
+  total float(10,2),
+  descuento float(10,2),
+  iva float(10,2),
+  estado varchar(10),
   observacion text,
   foreign key(id_clientes) references tb_clientes (id_clientes)
 );
 
+-- ELIMINAR TABLA
+-- create table tb_ventas(
+--   id_ventas int primary key AUTO_INCREMENT ,
+--   id_clientes int,
+--   numero_fact int,
+--   fecha_venta datetime,
+--   total float (10,2),
+--   observacion text,
+--   iva float(10,2),
+--   foreign key(id_clientes) references tb_clientes (id_clientes)
+-- );
+
 create table tb_detalle_ventas(
   id_detalle_ventas int primary key AUTO_INCREMENT ,
-  id_ventas int,
+  id_factura int,
   id_producto int,
   cantidad int,
   observacion text,
-  foreign key(id_ventas) references tb_ventas (id_ventas),
+  foreign key(id_factura) references tb_factura (id_factura),
   foreign key(id_producto) references tb_producto (id_producto)
+);
+
+create table tb_detalle_servicio(
+  id_detalle_servicio int primary key AUTO_INCREMENT ,
+  id_factura int,
+  observacion text,
+  foreign key(id_factura) references tb_factura (id_factura)
 );
 
 CREATE TABLE tb_mensajes (
@@ -120,4 +147,32 @@ CREATE TABLE tb_promocion (
   imagen text,
   titulo varchar(100),
   descripcion varchar(100)
+);
+
+create table tb_empleado(
+  id_empleado int primary key AUTO_INCREMENT ,
+  cedula varchar(10),
+  nombres varchar(100),
+  telefono varchar(10),
+  direccion varchar(100),
+  cargo varchar(50),
+  sueldo float(10,2),
+  estado varchar(10)
+);
+
+create table tb_rol_empleado(
+  id_rol_pago int primary key AUTO_INCREMENT,
+  id_empleado int,
+  fecha date,
+  valor float(10,2),
+  foreign key(id_empleado) references tb_empleado (id_empleado)
+);
+
+create table tb_gastos(
+  id_gastos int primary key AUTO_INCREMENT ,
+  factura varchar(100),
+  fecha date,
+  descripcion varchar(100),
+  valor float(10,2),
+  estado varchar(10)
 );

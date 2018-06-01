@@ -61,9 +61,37 @@
       $resp=$conexion->query("update tb_producto set id_categoria='".$categoria."', producto='".$producto."',pvv='".$precio."' where id_producto=".$id);
       if($resp){
         // move_uploaded_file($subir, $imagen_url);
-        echo("<script>alert('Producto editado con exito');location.href = 'productos.php';</script>");
+        echo("<script>swal({
+                title: 'Ok?',
+                text: 'Registro editado con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
       }else{
-        echo("<script>alert('No se edito producto')</script>");
+        echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
       }
     }else{
       $id=$_POST['id'];
@@ -76,9 +104,37 @@
       $resp=$conexion->query("update tb_producto set id_categoria='".$categoria."', producto='".$producto."',imagen='".$imagen_url."',pvv='".$precio."' where id_producto=".$id);
       if($resp){
         move_uploaded_file($subir, $imagen_url);
-        echo("<script>alert('Producto editado con exito');location.href = 'productos.php';</script>");
+        echo("<script>swal({
+                title: 'Ok?',
+                text: 'Registro editado con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
       }else{
-        echo("<script>alert('No se edito producto')</script>");
+        echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
       }
 
     }

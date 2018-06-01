@@ -1,8 +1,8 @@
-<div class="modal fade" id="editar<?php echo $resp['id_proveedores']; ?>" tabindex="-1" role="dialog" aria-labelledby="editar<?php echo $resp['id_proveedores']; ?>Label" data-backdrop="static" data-keyboard="false" aria-hidden="true"> 
+<div class="modal fade" id="editar<?php echo $resp['id_empleado']; ?>" tabindex="-1" role="dialog" aria-labelledby="editar<?php echo $resp['id_empleado']; ?>Label" data-backdrop="static" data-keyboard="false" aria-hidden="true"> 
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Editar Empleado</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -10,14 +10,22 @@
                 <div class="modal-body">
                   <form action="" id="editar_proveed" method="post">
                     <div class="form-group">
-                      <label for="">RUC:</label>
-                      <input name="id" type="hidden" value="<?php echo $resp['id_proveedores'] ?>">
-                      <input name="ruc" class="form-control" type="text" required="" minlength="13" value="<?php echo $resp['cedula_ruc'] ?>" maxlength="13">
+                      <label for="">Cedula:</label>
+                      <input name="id" type="hidden" value="<?php echo $resp['id_empleado'] ?>">
+                      <input name="ruc" class="form-control" type="text" required="" minlength="13" value="<?php echo $resp['cedula'] ?>" maxlength="13">
                     </div>
                     <div id="message_cedula"></div>
                     <div class="form-group">
                       <label for="">Nombres:</label>
                       <input name="nombres" class="form-control" type="text" required="" value="<?php echo $resp['nombres'] ?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Cargo:</label>
+                      <input name="cargo" class="form-control" type="text" value="<?php echo $resp['cargo'] ?>" required="">
+                    </div>
+                    <div class="form-group">
+                      <label for="">Sueldo:</label>
+                      <input name="sueldo" class="form-control" type="text" value="<?php echo $resp['sueldo'] ?>" required="">
                     </div>
                     <div class="form-group">
                       <label for="">Telefono:</label>
@@ -28,8 +36,11 @@
                       <input name="direccion" class="form-control" type="text" value="<?php echo $resp['direccion'] ?>" required="">
                     </div>
                     <div class="form-group">
-                      <label for="">Correo:</label>
-                      <input name="correo" class="form-control" type="email" value="<?php echo $resp['correo'] ?>" required="">
+                      <label for="">Estado:</label>
+                      <select class="form-control" name="estado" id="">
+                        <option value="ACTIVO" <?php if($resp['estado']=='ACTIVO'){ echo ('selected');} ?> >ACTIVO</option>
+                        <option value="INACTIVO" <?php if($resp['estado']=='INACTIVO'){ echo ('selected');} ?> >INACTIVO</option>
+                      </select>
                     </div>
                     <div id="message_edicion"></div>
                   
@@ -49,15 +60,17 @@
     $id=$_POST['id'];
     $ruc=$_POST['ruc'];
     $nombres=$_POST['nombres'];
+    $cargo=$_POST['cargo'];
+    $sueldo=$_POST['sueldo'];
     $telefono=$_POST['telefono'];
     $direccion=$_POST['direccion'];
-    $correo=$_POST['correo'];
+    $estado=$_POST['estado'];
 
-    $resp=$conexion->query("update tb_proveedores set cedula_ruc='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',correo='".$correo."' where id_proveedores=".$id);
+    $resp=$conexion->query("update tb_empleado set cedula='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',cargo='".$cargo."',sueldo='".$sueldo."',estado='".$estado."' where id_empleado=".$id);
     if($resp){
       echo("<script>swal({
                 title: 'Ok?',
-                text: 'Proveedor editado con exito :)',
+                text: 'Empleado editado con exito :)',
                 type: 'success',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -67,7 +80,7 @@
                 allowOutsideClick:false,
               }).then((result) => {
                 if (result.value) {
-                  location.href = 'proveedores.php';
+                  location.href = 'empleado.php';
                 }
               })</script>");
     }else{
@@ -83,7 +96,7 @@
                 allowOutsideClick:false,
               }).then((result) => {
                 if (result.value) {
-                  location.href = 'proveedores.php';
+                  location.href = 'empleado.php';
                 }
               })</script>");
     }

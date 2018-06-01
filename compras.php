@@ -15,6 +15,9 @@ header('location:cerrar_sesion.php');
   <!-- Latest compiled and minified CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<link rel="stylesheet" href="css/datepicker.min.css">
+<script src="js/datepicker.min.js"></script>
+<script src="js/datepicker.es.min.js"></script>
 <!-- <script src="js/select2_locale_es.js"></script> -->
   <script>
     $(document).ready(function(){
@@ -56,7 +59,7 @@ header('location:cerrar_sesion.php');
 
         <div class="form-group">
           <label for="">Fecha</label>
-          <input type="text" name="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+          <input type="text" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
         </div>
 
         <div class="form-group">
@@ -65,7 +68,7 @@ header('location:cerrar_sesion.php');
             <option value="0" selected="">Seleccione...</option>
             <?php 
               require_once('conexion.php'); 
-              $prov=$conexion->query("SELECT `tb_categoria`.`categoria`, `tb_producto`.* FROM `tb_categoria` INNER JOIN `tb_producto` ON `tb_producto`.`id_categoria` = `tb_categoria`.`id_categoria`");
+              $prov=$conexion->query("SELECT `tb_categoria`.`categoria`, `tb_producto`.* FROM `tb_categoria` INNER JOIN `tb_producto` ON `tb_producto`.`id_categoria` = `tb_categoria`.`id_categoria`  order by producto");
               while($resp=mysqli_fetch_array($prov)){
             ?>
             <option value="<?php echo $resp['id_producto']; ?>"><?php echo $resp['producto']; ?></option>
@@ -80,7 +83,7 @@ header('location:cerrar_sesion.php');
 
         <div class="form-group">
           <label for="">Cantidad</label>
-          <input type="text" name="cantidad" id="cantidad" class="form-control" required="">
+          <input type="number" name="cantidad" id="cantidad" class="form-control" required="" min="1">
         </div>
 
         <div class="form-group">
@@ -92,7 +95,11 @@ header('location:cerrar_sesion.php');
       
       <div class="col-md-6">
         <center><h1>PRODUCTOS</h1></center>
-      <form action="" id="guardar_compras">         
+      <form action="" id="guardar_compras"> 
+      <input type="hidden" name="factura_g">
+      <input type="hidden" name="fecha_g">
+      <input type="hidden" name="proveedor_g"> 
+      <input type="hidden" name="total_g">        
         <table class="table table-hover table-striped table-bordered table-responsive order-table" id="tbl_products">
           <thead>
             <tr>
@@ -122,14 +129,16 @@ header('location:cerrar_sesion.php');
         <h1>Total $ <span id="total">0.00</span></h1>
       </div>
       <div class="col-12 d-flex justify-content-center mb-3">
-        <button class="btn btn-success btn-lg"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+        <button class="btn btn-success btn-lg" disabled="" id="guardar_t"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
       </div>
 
       </form>
       </div>
     </div>
 	</div>
+
   <script src="js/compras_products.js"></script>
+  <script src="js/guardar_compras.js"></script>
   <script>
     $(document).ready(function(){
       $('.producto').select2();
@@ -142,6 +151,12 @@ header('location:cerrar_sesion.php');
         }else{
           $('#agregar').attr('disabled',true);
         }
+      });
+
+      $('#fecha').datepicker({
+        language:'es',
+        todayHighlight:true,
+        format:'yyyy-mm-dd'
       });
     });
   </script>

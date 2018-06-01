@@ -35,9 +35,37 @@
 
     $resp=$conexion->query("update tb_categoria set categoria='".$ruc."' where id_categoria=".$id);
     if($resp){
-      echo("<script>alert('Categoria editada con exito');location.href = 'productos.php';</script>");
+      echo("<script>swal({
+                title: 'Ok?',
+                text: 'Registro editado con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
     }else{
-      echo("<script>alert('No se edito categoria')</script>");
+      echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'productos.php';
+                }
+              })</script>");
     }
 
   }

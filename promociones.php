@@ -94,31 +94,116 @@ $imagen_url='img_promo/'.$_FILES['promocion1']['name'];
 $update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=1");
 if($update){
         move_uploaded_file($subir, $imagen_url);
-        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+        echo("<script>swal({
+                title: 'Ok?',
+                text: 'Promoción editada con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }else{
-        echo("<script>alert('No se edito Promocion')</script>");
+        echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }
 }
 if(isset($_POST['promo2'])){
-$subir=$_FILES['promocion1']['tmp_name'];
-$imagen_url='img_promo/'.$_FILES['promocion1']['name'];
+$subir=$_FILES['promocion2']['tmp_name'];
+$imagen_url='img_promo/'.$_FILES['promocion2']['name'];
 $update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=2");
 if($update){
         move_uploaded_file($subir, $imagen_url);
-        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+        echo("<script>swal({
+                title: 'Ok?',
+                text: 'Promoción editada con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }else{
-        echo("<script>alert('No se edito Promocion')</script>");
+        echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }
+}
 if(isset($_POST['promo3'])){
-$subir=$_FILES['promocion1']['tmp_name'];
-$imagen_url='img_promo/'.$_FILES['promocion1']['name'];
+$subir=$_FILES['promocion3']['tmp_name'];
+$imagen_url='img_promo/'.$_FILES['promocion3']['name'];
 $update=$conexion->query("update tb_promocion set imagen='".$imagen_url."' where id_promocion=3");
 if($update){
         move_uploaded_file($subir, $imagen_url);
-        echo("<script>alert('Promocion editado con exito');location.href = 'promociones.php';</script>");
+        echo("<script>swal({
+                title: 'Ok?',
+                text: 'Promoción editada con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }else{
-        echo("<script>alert('No se edito Promocion')</script>");
+        echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se edito',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'promociones.php';
+                }
+              })</script>");
       }
 }
-}
+
  ?>

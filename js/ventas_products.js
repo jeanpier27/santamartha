@@ -9,7 +9,7 @@ $(document).ready(function(){
 		var subt=parseFloat($('#subtotal').text());
 		$('input[name=factura_g]').val($('input[name=factura]').val());
 		$('input[name=fecha_g]').val($('input[name=fecha]').val());
-		$('input[name=proveedor_g]').val($('select[name=proveedor]').val());
+		$('input[name=cliente_g]').val($('select[name=cliente]').val());
 		// var iva=parseFloat($('#iva').text());
 		// var total=parseFloat($('#total').text());
 		subt=(parseFloat(subt)+(parseFloat(valor)*parseFloat(cantidad))).toFixed(2);
@@ -29,10 +29,12 @@ $(document).ready(function(){
 		$("#select2-produc-container").attr("title","Seleccione...");
 		$("#select2-produc-container").html("Seleccione...");
 		$('#valor').val('');
+		$('#disponible').val('');
 		$('#cantidad').val('');
 		$('#agregar').attr('disabled',true);
 		$('#guardar_t').removeAttr('disabled');
 		$('input[name=total_g]').val(total);
+		$('#descuento').attr('max',subt);
 	});
 
 	$(document).on('click','.btn-remove',function(){
@@ -58,7 +60,7 @@ $(document).ready(function(){
 		$('#total').empty();
 		$('#total').append(total);
 		$('input[name=total_g]').val(total);
-
+		$('#descuento').attr('max',subt);
 		$('#fila'+id_remove+'').remove();
 	});
 });
