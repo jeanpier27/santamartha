@@ -67,67 +67,28 @@ header('location:cerrar_sesion.php');
       		{
 	         title: 'Cliente: <?php echo $resp_dias['nombres']; ?> Servicio: <?php echo $resp_dias['servicio']; ?>',
 	          start: "<?php echo $resp_dias['fecha_inicio']; ?>",
-	          end: '<?php echo $resp_dias['fecha_fin']; ?>'
+	          end: '<?php echo $resp_dias['fecha_fin']; ?>',
+            url: "<?php echo $resp_dias['id_agenda']; ?>",
+            color:<?php if($resp_dias['estado']=='ACTIVO'){ ?> '#3498db' <?php }elseif ($resp_dias['estado']=='PAGADO') { ?> '#2ecc71' <?php }elseif ($resp_dias['estado']=='ANULADO') {?> '#e74c3c' <?php } ?>
 	        },
       	
 
         <?php } ?>
 
-        // {
-        //   title: 'All Day Event',
-        //   start: '2018-03-01'
-        // },
-        // {
-        //   title: 'Long Event',
-        //   start: '2018-03-07',
-        //   end: '2018-03-10'
-        // },
-        // {
-        //   id: 999,
-        //   title: 'Repeating Event',
-        //   start: '2018-03-09T16:00:00'
-        // },
-        // {
-        //   id: 999,
-        //   title: 'Repeating Event',
-        //   start: '2018-03-16T16:00:00'
-        // },
-        // {
-        //   title: 'Conference',
-        //   start: '2018-03-11',
-        //   end: '2018-03-13'
-        // },
-        // {
-        //   title: 'Meeting',
-        //   start: '2018-04-19 09:30:00',
-        //   end: '2018-04-19 18:30:00'
-        // },
-        // {
-        //   title: 'Lunch',
-        //   start: '2018-03-12T12:00:00'
-        // },
-        // {
-        //   title: 'Meeting',
-        //   start: '2018-03-12T14:30:00'
-        // },
-        // {
-        //   title: 'Happy Hour',
-        //   start: '2018-03-12T17:30:00'
-        // },
-        // {
-        //   title: 'Dinner',
-        //   start: '2018-03-12T20:00:00'
-        // },
-        // {
-        //   title: 'Birthday Party',
-        //   start: '2018-03-13T07:00:00'
-        // },
-        // {
-        //   title: 'Click for Google',
-        //   url: 'http://google.com/',
-        //   start: '2018-03-28'
-        // }
-      ]
+      ],
+      eventRender: function(event, element) {
+          // element.qtip({
+          //   content: event.description
+          // });
+          element.attr('href', 'javascript:void(0);');
+          element.click(function() {
+            // alert(event.url);
+            
+            $('#exampleModal').modal("show");
+            $('#id_agenda').val(event.url);
+
+          });
+        }
     });
 
     // build the locale selector's options
@@ -148,5 +109,54 @@ header('location:cerrar_sesion.php');
     // });
   });
 	</script>
+
+  <!-- Button trigger modal -->
+<!-- <button type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+<!-- <input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agenda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="servicio.php" method="post" id="agenda">
+        <input type="hidden" name="idagenda" id="id_agenda">
+          
+        <div class="form-group">
+          <label for="">Empleado</label>
+          <select class="form-control" name="empleadi" id="">
+            <option value="0">Seleccione...</option>
+            <?php 
+              $emple=$conexion->query("select * from tb_empleado where estado='ACTIVO'");
+              while($resp=mysqli_fetch_array($emple)){
+              ?>
+
+                <option value="<?php echo $resp['id_empleado']; ?>"> <?php echo $resp['nombres']; ?></option>
+              <?php 
+
+              } ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="">Valor</label>
+          <input type="text" name="valor" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <button type="submit" name="guard" class="btn btn-primary">Aceptar</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

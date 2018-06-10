@@ -150,13 +150,13 @@
           </div>
         </div>
         <div class="row text-center">
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
               <i class="fa fa-car fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="service-heading">Lavado de Auto Sencillo</h4>
-            <!-- <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p> -->
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
@@ -164,8 +164,8 @@
               <i class="fa fa-car fa-stack-1x fa-inverse"></i>
             </span>
             <h4 class="service-heading">Lavado de Auto Normal</h4>
-            <!-- <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p> -->
-          </div>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          </div> -->
           <!-- <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -174,6 +174,7 @@
             <h4 class="service-heading">Web Security</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div> -->
+          <div class="col-md-4"></div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
               <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -195,8 +196,10 @@
                       <div class="form-group">
                         <label for="">Elije el Servicio</label>
                         <select class="form-control" name="servicio" id="servicio">
-                          <option value="Lavada de auto sencillo">Lavada de auto sencillo</option>
-                          <option value="Lavada de auto normal">Lavada de auto normal</option>
+                          <option value="Lavada de moto">Lavada de moto</option>
+                          <option value="Lavada de carro">Lavada de carro</option>
+                          <option value="Lavada de buses">Lavada de buses</option>
+                          <option value="Lavada de volqueta">Lavada de volqueta</option>
                     
                         </select>
                       </div>
@@ -225,7 +228,7 @@
                       <div id="message_agenda_guardar" ></div>
 
 
-                  </div>
+                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-success" id="aceptar_agenda" disabled="disabled">Aceptar</button>
                     <button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -236,6 +239,7 @@
               
             </div>
           </div>
+          <div class="col-md-4"></div>
         </div>
       </div>
     </section>

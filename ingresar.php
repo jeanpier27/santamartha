@@ -12,6 +12,7 @@ $clave=$_POST['contra'];
 	 			session_start();
 	 			$_SESSION['nombres'] = $consulta['nombres'];
 	 			$_SESSION['cargo'] = $consulta['cargo'];
+	 			$_SESSION['usuario'] = $consulta['usuario'];
 	 			echo 'ok';
 	 		}else{
 	 			echo 'error';	

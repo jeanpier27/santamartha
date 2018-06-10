@@ -34,7 +34,7 @@ $(document).ready(function(){
 		$('#agregar').attr('disabled',true);
 		$('#guardar_t').removeAttr('disabled');
 		$('input[name=total_g]').val(total);
-		$('#descuento').attr('max',subt);
+		// $('#descuento').attr('max',subt);
 	});
 
 	$(document).on('click','.btn-remove',function(){

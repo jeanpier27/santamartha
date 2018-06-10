@@ -17,6 +17,7 @@
 	          <a class="dropdown-item" href="gastos.php"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i><span class="ml-1">Gastos</span></a>
 	          <a class="dropdown-item" href="ventas.php"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="ml-1">Ventas</span></a>
 	          <a class="dropdown-item" href="rol_pago.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Roles de Pago</span></a>
+	          <a class="dropdown-item" href="servicio.php"><i class="fa fa-car" aria-hidden="true"></i><span class="ml-1">Servicos</span></a>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown" id="reportes">
@@ -43,12 +44,13 @@
 	          <a class="dropdown-item" href="productos.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Productos</span></a>
 	          <a class="dropdown-item" href="promociones.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Promociones</span></a>
 	          <a class="dropdown-item" href="proveedores.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Proveedores</span></a>
+	          <a class="dropdown-item" href="usuarios.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Usuarios</span></a>
 	        </div>
 	      </li>
 	    </ul>
 	    <!-- <form class="form-inline my-2 my-lg-0"> -->
 	      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-	      <h6 class="mr-2" style="color:#fed136;">Bienvenido: <?php echo $_SESSION['nombres']; ?></h6>
+	      <h6 class="mr-2" style="color:#fed136;">Bienvenido: <?php echo $_SESSION['usuario']; ?></h6>
 	      <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#salir">Salir</button>
 	    <!-- </form> -->
 	  </div>

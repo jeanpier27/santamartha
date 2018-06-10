@@ -108,8 +108,10 @@ create table tb_detalle_ventas(
 create table tb_detalle_servicio(
   id_detalle_servicio int primary key AUTO_INCREMENT ,
   id_factura int,
+  id_empleado int,
   observacion text,
-  foreign key(id_factura) references tb_factura (id_factura)
+  foreign key(id_factura) references tb_factura (id_factura),
+  foreign key(id_empleado) references tb_empleado (id_empleado)
 );
 
 CREATE TABLE tb_mensajes (
@@ -129,6 +131,7 @@ CREATE TABLE tb_agenda (
   fecha_inicio datetime,
   fecha_fin datetime,
   fecha timestamp,
+  estado varchar(10);
   foreign key(id_clientes) references tb_clientes (id_clientes)
 );
 

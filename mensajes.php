@@ -100,21 +100,75 @@ header('location:cerrar_sesion.php');
           <p><?php echo $telefono; ?></p>
           <!-- <input type="text" readonly="" value="">           -->
         </div>
+        <form  id="respondermsj" action="mensajes.php" method="post">
         <div class="form-group">
           <h5>CORREO:</h5>
           <p><?php echo $correos; ?></p>
-          <!-- <input type="text" readonly="" value="">           -->
+          <input type="hidden" name="correo" value="<?php echo $correos; ?>">          
         </div>
         <div class="form-group">
           <h5>MENSAJE:</h5>
           <p><?php echo $mensaj; ?></p>
           <!-- <textarea style="width: 90%;"></textarea>        -->
         </div>
-
-        <button class="btn btn-success" id="responder">Responder</button>
+        
+        <button class="btn btn-success mb-3" id="responder">Responder</button>
         <?php } ?>
 
       </div>
+      <?php 
+      if(isset($_POST['enviarmsj'])){
+          require_once('phpmailer/PHPMailerAutoload.php');
+          $mensaje=$_POST['respmsj'];
+          $correo=$_POST['correo'];
+          $mail=new PHPMailer;
+          $mail->Host='smtp.gmail.com';
+          $mail->SMTPAuth=true;
+          $mail->Username="jeancervantesc@gmail.com";
+          $mail->Password="271991jpcc01+";
+          $mail->SMTPSecure="ssl";
+          $mail->Port=465;
+          $mail->Subject="Autoservicio Santa Martha";
+          $mail->Body="".$mensaje."";
+          $mail->SetFrom('jeancervantesc@gmail.com','SM');
+          $mail->addAddress($correo);
+          if($mail->send()){
+            echo("<script>swal({
+                title: 'Ok?',
+                text: 'Mensaje enviado con exito :)',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'mensajes.php';
+                }
+              })</script>");
+          }else{
+            echo("<script>swal({
+                title: 'Error?',
+                text: 'Ah ocurrido un error :( No se envio el mensaje',
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick:false,
+              }).then((result) => {
+                if (result.value) {
+                  location.href = 'mensajes.php';
+                }
+              })</script>");
+          }
+
+        
+      }
+       ?>
     </div>
 	</div>
   <script>
@@ -122,7 +176,7 @@ header('location:cerrar_sesion.php');
 
       $('#responder').click(function(e){
         e.preventDefault();
-        var a='<form class="mt-3 mb-3"><textarea placeholder="Escribe tu respuesta aqui...." style="width: 100%;" id="respuesta"></textarea><button class="btn btn-success">Enviar</button> <a href="mensajes.php" class="btn btn-danger">Cancelar</a></form>'
+        var a='<textarea class="mt-3 mb-3" required name="respmsj" placeholder="Escribe tu respuesta aqui...." style="width: 100%;" id="respuesta"></textarea><input class="btn btn-success mb-3" type="submit" value="Enviar" name="enviarmsj" > <a href="mensajes.php" class="btn btn-danger mb-3">Cancelar</a></form>'
         $(this).after(a);
         $(this).attr('disabled',true);
       });

@@ -125,7 +125,7 @@ header('location:cerrar_sesion.php');
         <h1>Subtotal $ <span id="subtotal">0.00</span></h1>
       </div>
       <div class="col-12 d-flex justify-content-end">
-        <h1>Descuento $ <input type="number" class="numero" id="descuento" name="descuento" size="1" min="0" step=".01" value="0" style="width:100px"></h1>
+        <h1>Descuento % <input type="number" class="numero" id="descuento" name="descuento" size="1" min="0" step="1" max="99" value="0" style="width:100px"></h1>
       </div>
       <div class="col-12 d-flex justify-content-end">
         <h1>Iva 12% $ <span id="iva">0.00</span></h1>
@@ -181,7 +181,7 @@ header('location:cerrar_sesion.php');
         var total;
         var subt;
         if(desc>0){
-          subt=(parseFloat($('#subtotal').text()))-parseFloat(desc);
+          subt=(parseFloat($('#subtotal').text()))-(parseFloat(desc)*0.01);
           iva=(0.12*subt).toFixed(2);
           total=(parseFloat(subt)+parseFloat(iva)).toFixed(2);
           $('#iva').empty();
