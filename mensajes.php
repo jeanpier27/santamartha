@@ -30,7 +30,7 @@ header('location:cerrar_sesion.php');
       <div class="col-md-6">
         <center><h1>MENSAJES</h1></center>
         <div class="table-response">
-          <table class="table table-hover table-striped table-bordered table-responsive order-table" aling="center" id="tbl_datos">
+          <table class="table table-hover table-striped" aling="center" id="tbl_datos">
             <thead>
                 <tr  class="info">
 
@@ -124,13 +124,13 @@ header('location:cerrar_sesion.php');
           $mail=new PHPMailer;
           $mail->Host='smtp.gmail.com';
           $mail->SMTPAuth=true;
-          $mail->Username="jeancervantesc@gmail.com";
-          $mail->Password="271991jpcc01+";
+          $mail->Username="autoserviciosantamartha@gmail.com";
+          $mail->Password="autoservicio";
           $mail->SMTPSecure="ssl";
           $mail->Port=465;
           $mail->Subject="Autoservicio Santa Martha";
           $mail->Body="".$mensaje."";
-          $mail->SetFrom('jeancervantesc@gmail.com','SM');
+          $mail->SetFrom('autoserviciosantamartha@gmail.com','SM');
           $mail->addAddress($correo);
           if($mail->send()){
             echo("<script>swal({

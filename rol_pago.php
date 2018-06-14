@@ -38,8 +38,12 @@ header('location:cerrar_sesion.php');
 
         <div class="form-group">
           <label for="">Fecha</label>
-          <input type="text" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+          <input type="text" name="fecha" id="fecha" class="form-control" value="" readonly>
         </div>
+
+        <?php 
+        // echo date('Y-m-d'); 
+        ?>
 
 
         <div class="form-group">
@@ -51,11 +55,11 @@ header('location:cerrar_sesion.php');
 
       <div class="col-md-6">
         <center><h1>Consultar Rol de Pago</h1></center><br>
-        <form action="" method="post" id="add_products">
+        <form action="rol_pago.php" method="post" id="add_products">
 
         <div class="form-group">
           <label for="">Fecha</label>
-          <input type="text" name="fecha_c" id="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+          <input type="text" name="fecha_c" id="fecha_c" class="form-control" value="" readonly>
         </div>
 
 
@@ -69,16 +73,80 @@ header('location:cerrar_sesion.php');
         <iframe width="560" height="315" src="https://www.youtube.com/embed/mhHqonzsuoA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div> -->
       </div>
+      <?php 
+      require_once('conexion.php');
+      if(isset($_POST['fecha'])){
+        $fecha=$_POST['fecha'];
+        list($anio,$mes) = explode('-', $fecha);
+        $empleado=$conexion->query("select * from tb_empleado");
+        $iess=9.45;
+        $repetid=$conexion->query("select 1 from tb_rol_empleado where anio='".$anio."' and mes='".$mes."'");
+        $total_rep=mysqli_fetch_array($repetid);
+        if($total_rep[1]!=1){
+        while($empl=mysqli_fetch_array($empleado)){
+          $total=$empl['sueldo']-($empl['sueldo']*($iess*0.01));
+          $insert=$conexion->query("insert into tb_rol_empleado(id_empleado,anio,mes,valor,estado)values('".$empl['id_empleado']."','".$anio."','".$mes."','".$total."','ACTIVO')");            
+        }
+        }else{
+          echo("<script>swal({
+              type: 'warning',
+              title: 'Ya se encuentra generado el rol del mes seleccionado',
+              showConfirmButton: false,
+              timer: 2500
+              }) </script>");
+        }
+
+       ?>
+      <div class="row">
+        <div class="col-md-12">
+          <iframe src="<?php echo 'rol_pdf.php?anio='.$anio.'&mes='.$mes; ?>" width="100%" height="400px"></iframe>
+        </div>
+      </div>
+      <?php 
+        }
+       ?>
+
+       <?php 
+      require_once('conexion.php');
+      if(isset($_POST['fecha_c'])){
+        $fecha=$_POST['fecha_c'];
+        list($anio,$mes) = explode('-', $fecha);
+        // $empleado=$conexion->query("select * from tb_empleado");
+        // $iess=9.45;
+        // $repetid=$conexion->query("select 1 from tb_rol_empleado where anio='".$anio."' and mes='".$mes."'");
+        // $total_rep=mysqli_fetch_array($repetid);
+        // if($total_rep[1]!=1){
+        // while($empl=mysqli_fetch_array($empleado)){
+        //   $total=$empl['sueldo']-($empl['sueldo']*($iess*0.01));
+        //   $insert=$conexion->query("insert into tb_rol_empleado(id_empleado,anio,mes,valor,estado)values('".$empl['id_empleado']."','".$anio."','".$mes."','".$total."','ACTIVO')");            
+        // }
+        // }else{
+        //   echo("<script>swal({
+        //       type: 'warning',
+        //       title: 'Ya se encuentra generado el rol del mes seleccionado',
+        //       showConfirmButton: false,
+        //       timer: 2500
+        //       }) </script>");
+        // }
+
+       ?>
+      <div class="row">
+        <div class="col-md-12">
+          <iframe src="<?php echo 'rol_pdf.php?anio='.$anio.'&mes='.$mes; ?>" width="100%" height="400px"></iframe>
+        </div>
+      </div>
+      <?php 
+        }
+       ?>
     </div>
     
-	
+  
   <?php 
-  if(isset($_POST['agregar'])){
+  if(isset($_POST['agregarrr'])){
     $factura=$_POST['factura'];
     $fecha=$_POST['fecha'];
     $descripcion=$_POST['descripcion'];
     $valor=$_POST['valor'];
-    require_once('conexion.php');
     $gastos=$conexion->query(" insert into tb_gastos(factura,fecha,descripcion,valor,estado)values('".$factura."','".$fecha."','".$descripcion."','".$valor."','ACTIVO')" );
     if($gastos){
       echo("<script>swal({
@@ -123,8 +191,16 @@ header('location:cerrar_sesion.php');
     $(document).ready(function(){
       $('#fecha').datepicker({
         language:'es',
-        todayHighlight:true,
-        format:'yyyy-mm-dd'
+        // todayHighlight:true,
+        format:'yyyy-mm',
+        minViewMode:1
+      });
+
+      $('#fecha_c').datepicker({
+        language:'es',
+        // todayHighlight:true,
+        format:'yyyy-mm',
+        minViewMode:1
       });
 
       // $('.producto').select2();

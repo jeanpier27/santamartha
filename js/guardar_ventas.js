@@ -26,7 +26,7 @@ $(document).ready(function(){
 		                  },
 		                success: function(data) {
 		                  // Success message
-		                  console.log(data);
+		                  // console.log(parseInt(data));
 		                  if(data==='rep'){
 		                  	swal({
 							  position: 'center',
@@ -45,7 +45,7 @@ $(document).ready(function(){
 							  timer: 3500
 							})
 		                  }
-		                  if(data==='ok'){
+		                  if(parseInt(data)>0){
 		                  	swal({
 							  title: 'Ok?',
 							  text: "Registro grabado con exito :)",
@@ -58,6 +58,7 @@ $(document).ready(function(){
 							  allowOutsideClick:false,
 							}).then((result) => {
 							  if (result.value) {
+							  	window.open('factura.php?id_fact='+data+'', '_blank');
 							    location.href = 'ventas.php';
 							  }
 							})

@@ -10,13 +10,18 @@
 	      </li>
 	      <li class="nav-item dropdown" id="herramientas">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          <i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Herramientas</span>
+	          <i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Módulos Administrativos</span>
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	          <a class="dropdown-item" href="compras.php"><i class="fa fa-cart-plus" aria-hidden="true"></i><span class="ml-1">Compras</span></a>
-	          <a class="dropdown-item" href="gastos.php"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i><span class="ml-1">Gastos</span></a>
+	          <a class="dropdown-item" href="gastos.php"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i><span class="ml-1">Gastos</span></a>	          
+	          <a class="dropdown-item" href="inventario.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><span class="ml-1">Inventario</span></a>
 	          <a class="dropdown-item" href="ventas.php"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="ml-1">Ventas</span></a>
+	          <?php 
+		        if($_SESSION['acceso']=='ADMINISTRADOR'){
+		         ?>
 	          <a class="dropdown-item" href="rol_pago.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Roles de Pago</span></a>
+		      <?php } ?>
 	          <a class="dropdown-item" href="servicio.php"><i class="fa fa-car" aria-hidden="true"></i><span class="ml-1">Servicos</span></a>
 	        </div>
 	      </li>
@@ -25,6 +30,9 @@
 	          <i class="fa fa-folder-open-o" aria-hidden="true"></i><span class="ml-1">Reportes</span>
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	          <a class="dropdown-item" href="reporte_compras.php"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="ml-1">Compras</span></a>
+	          <a class="dropdown-item" href="reporte_ventas.php"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="ml-1">Facturas</span></a>
+	          <a class="dropdown-item" href="reporte_gastos.php"><i class="fa fa-file-text-o" aria-hidden="true"></i><span class="ml-1">Gastos</span></a>
 	          <a class="dropdown-item" href="graficos.php"><i class="fa fa-line-chart" aria-hidden="true"></i><span class="ml-1">Graficas</span></a>
 	          <!-- <a class="dropdown-item" href="#"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="ml-1">Ventas</span></a> -->	          
 	        </div>
@@ -35,6 +43,9 @@
 	      <li class="nav-item" id="mensajes">
 	        <a class="nav-link" href="mensajes.php"><i class="fa fa-envelope" aria-hidden="true"></i><span class="ml-1">Mensajes</span></a>
 	      </li>
+        <?php 
+        if($_SESSION['acceso']=='ADMINISTRADOR'){
+         ?>
 	      <li class="nav-item dropdown" id="configuracion">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	          <i class="fa fa-cogs" aria-hidden="true"></i><span class="ml-1">Configuración</span>
@@ -47,6 +58,7 @@
 	          <a class="dropdown-item" href="usuarios.php"><i class="fa fa-wrench" aria-hidden="true"></i><span class="ml-1">Usuarios</span></a>
 	        </div>
 	      </li>
+	    <?php } ?>
 	    </ul>
 	    <!-- <form class="form-inline my-2 my-lg-0"> -->
 	      <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->

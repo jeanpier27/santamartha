@@ -46,7 +46,7 @@ if($error){
 	echo 'error';
 }else{
 	$conexion->commit();
-	echo 'ok';
+	echo $id_f[0];
 }
 }
 }else{

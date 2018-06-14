@@ -71,7 +71,7 @@ header('location:dashboard.php');
 	<div class="container contenedor" >
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-4 cont">
-				<form action="" id="formulario" style="padding: 10px;">
+				<form action="" autocomplete="off" id="formulario" style="padding: 10px;">
 					<h1 class="text-center" style="color:#fff;">INGRESO</h1>					
 					<div class="form-group">
 						<input class="form-control flat" id="usua" type="text" placeholder="usuario*" required="">

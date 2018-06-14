@@ -127,11 +127,13 @@ header('location:cerrar_sesion.php');
     if($gastos){
       $serv=$conexion->query("insert into tb_detalle_servicio(id_factura,id_empleado,observacion)values('".$idfact."','".$id_empleado."','".$servicio."')");
       if($serv){
-        $upda=$conexion->query("update tb_agenda set estado='PAGADO' where id_agenda=".$idagendas);
-        if($upda){
+        if($idagendas!=""){
+          $upda=$conexion->query("update tb_agenda set estado='PAGADO' where id_agenda=".$idagendas);
+          if($upda){
 
-        }else{
-          $error=1;
+          }else{
+            $error=1;
+          }
         }
 
       }else{
@@ -148,7 +150,6 @@ header('location:cerrar_sesion.php');
                 type: 'error',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
-                // cancelButtonColor: '#d33',
                 showCancelButton: false,
                 confirmButtonText: 'Aceptar',
                 allowOutsideClick:false,
@@ -160,23 +161,10 @@ header('location:cerrar_sesion.php');
       
     }else{
       $conexion->commit();
-      echo("<script>swal({
-                title: 'Ok?',
-                text: 'Registro grabado con exito :)',
-                type: 'success',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                // cancelButtonColor: '#d33',
-                showCancelButton: false,
-                confirmButtonText: 'Aceptar',
-                allowOutsideClick:false,
-              }).then((result) => {
-                if (result.value) {
-                  location.href = 'servicio.php';
-                }
-              })</script>");
+      echo("<script>swal({title: 'Ok?',text: 'Registro grabado con exito :)',          type: 'success',showCancelButton: true,confirmButtonColor: '#3085d6',  showCancelButton: false,  confirmButtonText: 'Aceptar',allowOutsideClick:false,              }).then((result) => {if (result.value) {         window.open('factura.php?id_fact=".$idfact."', '_blank'); location.href = 'dashboard.php'; }              })</script>");
       
     }
+                  // location.href = 'servicio.php';
 
     
    }

@@ -82,10 +82,40 @@ header('location:cerrar_sesion.php');
           // });
           element.attr('href', 'javascript:void(0);');
           element.click(function() {
-            // alert(event.url);
             
-            $('#exampleModal').modal("show");
-            $('#id_agenda').val(event.url);
+            $.ajax({
+              url:"verifica_agenda.php",
+              type:"POST",
+              data:{id_agenda:event.url},
+              success: function(data){
+                // console.log(data);
+                if(data==='no'){
+                  swal({
+                    type: 'warning',
+                    title: 'No puedes elegir servicios anteriores a la fecha actual',
+                    showConfirmButton: false,
+                    timer: 2500
+                  })
+                }else{
+                  if(data==='PAGADO'){
+                      swal({
+                        type: 'warning',
+                        title: 'Ya se encuentra pagado este servicio',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
+                  }else{
+                    $('#exampleModal').modal("show");
+                    $('#id_agenda').val(event.url);
+                    
+                  }
+                }
+              },
+              error: function(){
+                // console.log('error');
+              }
+            });
+            
 
           });
         }

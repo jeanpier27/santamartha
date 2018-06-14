@@ -46,6 +46,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#somos">Inicio</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#promociones">Promociones</a>
             </li>
             <li class="nav-item">
@@ -85,7 +88,24 @@
         </div>
       </div>
     </header>
-
+<!-- Home -->
+    <section id="somos">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="section-heading text-uppercase">Quiénes Somos</h2>
+          </div>
+          <div class="col-md-6 text-center" >
+            <h2>Misión</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatibus placeat, iusto repellendus labore dolorem ut ex hic veritatis sint eaque eos aperiam eveniet ipsam error natus, sunt eum doloribus!</p>
+          </div>
+          <div class="col-md-6 text-center">
+            <h2>Visión</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatibus placeat, iusto repellendus labore dolorem ut ex hic veritatis sint eaque eos aperiam eveniet ipsam error natus, sunt eum doloribus!</p>
+          </div>
+        </div>
+      </div>
+    </section>
   <!-- Carrusel -->
 
   <section id="promociones">
@@ -197,10 +217,15 @@
                         <label for="">Elije el Servicio</label>
                         <select class="form-control" name="servicio" id="servicio">
                           <option value="Lavada de moto">Lavada de moto</option>
-                          <option value="Lavada de carro">Lavada de carro</option>
-                          <option value="Lavada de buses">Lavada de buses</option>
-                          <option value="Lavada de volqueta">Lavada de volqueta</option>
-                    
+                          <option value="Lavada de carro">Lavada de carro</option>        
+                        </select>
+                      </div>
+                      <div class="form-group" id="c_carro" style="display:none;">
+                        <label for="">Elije tipo de carro</label>
+                        <select class="form-control"  name="carro" id="carro">      
+                          <option value="Pequeño">Pequeño</option>
+                          <option value="Mediano">Mediano</option>  
+                          <option value="Grande">Grande</option>
                         </select>
                       </div>
                       <div class="form-group">
@@ -440,6 +465,7 @@
     <script src="js/consulta_nombres.js"></script>
     <script src="js/agendar.js"></script>
     <script src="js/hora.js"></script>
+    <script src="js/tipo_carro.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="js/agency.min.js"></script>

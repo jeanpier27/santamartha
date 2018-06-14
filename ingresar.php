@@ -11,6 +11,7 @@ $clave=$_POST['contra'];
 	 		if($clave==$consulta['password']){
 	 			session_start();
 	 			$_SESSION['nombres'] = $consulta['nombres'];
+	 			$_SESSION['acceso'] = $consulta['acceso'];
 	 			$_SESSION['cargo'] = $consulta['cargo'];
 	 			$_SESSION['usuario'] = $consulta['usuario'];
 	 			echo 'ok';

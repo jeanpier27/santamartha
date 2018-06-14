@@ -78,7 +78,7 @@ header('location:cerrar_sesion.php');
           </div>
         </div>
         <div class="table-response " >
-          <table class="table table-hover table-striped table-bordered table-responsive order-table" aling="center" id="tbl_datos">
+          <table class="table table-hover table-striped" aling="center" id="tbl_datos">
             <thead>
                 <tr  class="info">
 

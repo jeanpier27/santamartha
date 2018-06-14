@@ -2,6 +2,8 @@
 	require_once('conexion.php');
 	date_default_timezone_set('America/Bogota'); 
 	$fecha=$_POST['fecha'];
+	$fecha_actual=date('Y-m-d');
+	$hora=date('H');
 	for($i=9;$i<=16;$i++){
 		$agenda=$conexion->query("select hour(fecha_inicio)as hora from tb_agenda where date(fecha_inicio)='".$fecha."'");
 		$band=0;
@@ -13,10 +15,20 @@
 			}
 		}
 		if($band==0){
-			if($i<12){
-				echo '<option value="'.$i.'">'.$i.':00 AM</option>';
+			if($fecha==$fecha_actual){
+				if($i>$hora){
+					if($i<12){
+						echo '<option value="'.$i.'">'.$i.':00 AM</option>';
+					}else{
+						echo '<option value="'.$i.'">'.$i.':00 PM</option>';
+					}
+				}
 			}else{
-				echo '<option value="'.$i.'">'.$i.':00 PM</option>';
+				if($i<12){
+					echo '<option value="'.$i.'">'.$i.':00 AM</option>';
+				}else{
+					echo '<option value="'.$i.'">'.$i.':00 PM</option>';
+				}
 			}
 			
 		}

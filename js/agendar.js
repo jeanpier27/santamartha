@@ -2,10 +2,10 @@ $(document).ready(function(){
 	$('#form_agendar').submit(function(e){
 		e.preventDefault();
 		var cedula=$('#cedula_agendar').val();
-		var servicio=$('#servicio').val();
+		var servicio=$('#servicio').val()+' '+$('#carro').val();
 	    var fecha=$('#fecha_agendar').val();
 	    var hora=$('#hora_agendar').val();
-	    var boton=$('#aceptar_agenda');	
+	    var boton=$('#aceptar_agenda');	    
 
 	    $.ajax({
 		                url: "./agendar.php",
@@ -87,5 +87,7 @@ $(document).ready(function(){
 		                      $('#fecha_agendar').empty();
 		                }
 		          	});
+
+	$('#c_carro').css('display','none');
 	});
 });

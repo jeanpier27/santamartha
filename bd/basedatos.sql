@@ -166,8 +166,10 @@ create table tb_empleado(
 create table tb_rol_empleado(
   id_rol_pago int primary key AUTO_INCREMENT,
   id_empleado int,
-  fecha date,
+  anio varchar(4),
+  mes varchar(2),
   valor float(10,2),
+  estado varchar(10),
   foreign key(id_empleado) references tb_empleado (id_empleado)
 );
 
@@ -179,3 +181,4 @@ create table tb_gastos(
   valor float(10,2),
   estado varchar(10)
 );
+

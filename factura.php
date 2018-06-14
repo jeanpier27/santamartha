@@ -25,11 +25,11 @@ function Header()
 function Footer()
 {
     // Posición: a 1,5 cm del final
-    $this->SetY(-15);
-    // Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Número de página
-    $this->Cell(0,10,''.$this->PageNo().'/{nb}',0,0,'C');
+    // $this->SetY(-15);
+    // // Arial italic 8
+    // $this->SetFont('Arial','I',8);
+    // // Número de página
+    // $this->Cell(0,10,''.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
 
@@ -37,10 +37,10 @@ $fact=$conexion->query("SELECT `tb_clientes`.*, `tb_factura`.* FROM `tb_clientes
 while($detf=mysqli_fetch_array($fact)){
 	$n_factura=$detf['numero_fact'];
 	$fecha=$detf['fecha'];
-	$cliente=$detf['nombre'].' '.$detf['apellido'];
+	$cliente=utf8_decode($detf['nombre']).' '.utf8_decode($detf['apellido']);
 	$cedula=$detf['cedula_ruc'];
 	$telefono=$detf['telefono'];
-	$direccion=$detf['direccion'];	
+	$direccion=utf8_decode($detf['direccion']);	
 	$descuento=$detf['descuento'];
 	$iva=$detf['iva'];
 	$total=$detf['total'];
@@ -84,7 +84,7 @@ if($count>0){
 	while($resp=mysqli_fetch_array($detalle)){
 		$pdf->SetFont('Times','',12);
 		$pdf->SetX(25);
-		$pdf->Cell(80,10,$resp['producto'],1,0);
+		$pdf->Cell(80,10,utf8_decode($resp['producto']),1,0);
 		$pdf->SetFont('Times','',14);
 		$pdf->SetX(105);
 		$pdf->Cell(25,10,$resp['cantidad_p'],1,0,'R');
@@ -98,7 +98,7 @@ if($count>0){
 	while($resp=mysqli_fetch_array($detalle_serv)){
 		$pdf->SetFont('Times','',12);
 		$pdf->SetX(25);
-		$pdf->Cell(80,10,$resp['observacion'],1,0);
+		$pdf->Cell(80,10,utf8_decode($resp['observacion']),1,0);
 		$pdf->SetFont('Times','',14);
 		$pdf->SetX(105);
 		$pdf->Cell(25,10,'',1,0,'R');

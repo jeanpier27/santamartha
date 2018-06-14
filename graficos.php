@@ -32,10 +32,11 @@ header('location:cerrar_sesion.php');
 	<div class="container" style="background: #fff; border-radius: 20px;">
     <div class="row">      
       <div class="col-12"><center><h1>Gráficos</h1></center></div>
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div id="container_line"></div>
       </div>
-      <div class="col-md-6">
+      <br><br>
+      <div class="col-md-12">
         <div id="container_pie"></div>
       </div>
     </div>
@@ -44,68 +45,86 @@ header('location:cerrar_sesion.php');
     $(document).ready(function(){
 
       Highcharts.chart('container_line', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: 'Santa Martha'
+  },
+  subtitle: {
+    text: 'autoserviciosantamartha.com'
+  },
+  xAxis: {
+    categories: [
+      'Ene',
+      'Feb',
+      'Mar',
+      'Abr',
+      'May',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dic'
+    ],
+    crosshair: true
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Santa Martha'
+    }
+  },
+  tooltip: {
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+      '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+    footerFormat: '</table>',
+    shared: true,
+    useHTML: true
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0.2,
+      borderWidth: 0
+    }
+  },
+  series: [{
+    name: 'Compras',
+    data:[ 
+    <?php 
+    require_once('conexion.php');
+    for($i=1;$i<=12;$i++){
+    $compra=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_compras` WHERE year(fecha_compra)='2018' and month(fecha_compra)='".$i."'");
+    $respcomp=mysqli_fetch_array($compra);
+      echo $respcomp[0].',';
+    } ?>
+    ]
+  }, {
+    name: 'Ventas',
+    data: [
+    <?php 
+    for($i=1;$i<=12;$i++){
+    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018' and month(fecha)='".$i."'");
+    $respvent=mysqli_fetch_array($venta);
+      echo $respvent[0].',';
+    } ?>
+    ]
+  }, {
+    name: 'Gastos',
+    data: [
+    <?php 
+    for($i=1;$i<=12;$i++){
+    $gasto=$conexion->query("SELECT ifnull(sum(valor),0) as total FROM `tb_gastos` WHERE year(fecha)='2018' and month(fecha)='".$i."'");
+    $respgast=mysqli_fetch_array($gasto);
+      echo $respgast[0].',';
+    } ?>
+    ]
 
-          title: {
-            text: 'Titulo'
-          },
-
-          subtitle: {
-            text: 'Source: thesolarfoundation.com'
-          },
-
-          yAxis: {
-            title: {
-              text: 'Number of Employees'
-            }
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-          },
-
-          plotOptions: {
-            series: {
-              label: {
-                connectorAllowed: false
-              },
-              pointStart: 2010
-            }
-          },
-
-          series: [{
-            name: 'Installation',
-            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-          }, {
-            name: 'Manufacturing',
-            data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-          }, {
-            name: 'Sales & Distribution',
-            data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-          }, {
-            name: 'Project Development',
-            data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-          }, {
-            name: 'Other',
-            data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-          }],
-
-          responsive: {
-            rules: [{
-              condition: {
-                maxWidth: 500
-              },
-              chartOptions: {
-                legend: {
-                  layout: 'horizontal',
-                  align: 'center',
-                  verticalAlign: 'bottom'
-                }
-              }
-            }]
-          }
-
-        });
+  }]
+});
 
       Highcharts.chart('container_pie', {
           chart: {
@@ -115,7 +134,7 @@ header('location:cerrar_sesion.php');
               type: 'pie'
           },
           title: {
-              text: 'Titulo'
+              text: 'Santa Martha'
           },
           tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -126,7 +145,7 @@ header('location:cerrar_sesion.php');
                   cursor: 'pointer',
                   dataLabels: {
                       enabled: true,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} ',
                       style: {
                           color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                       }
@@ -134,28 +153,32 @@ header('location:cerrar_sesion.php');
               }
           },
           series: [{
-              name: 'Brands',
+              name: 'Porcentaje',
               colorByPoint: true,
               data: [{
-                  name: 'Microsoft Internet Explorer',
-                  y: 56.33
+                  name: 'Compras',
+
+                  <?php 
+                    $compra=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_compras` WHERE year(fecha_compra)='2018'");
+                    $respcomp=mysqli_fetch_array($compra);
+                      echo 'y:'.$respcomp[0];
+                    ?>
               }, {
-                  name: 'Chrome',
-                  y: 24.03,
+                  name: 'Ventas',
+                   <?php 
+                    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018'");
+                    $respvent=mysqli_fetch_array($venta);
+                      echo 'y:'.$respvent[0].',';
+                     ?>
                   sliced: true,
                   selected: true
               }, {
-                  name: 'Firefox',
-                  y: 10.38
-              }, {
-                  name: 'Safari',
-                  y: 4.77
-              }, {
-                  name: 'Opera',
-                  y: 0.91
-              }, {
-                  name: 'Proprietary or Undetectable',
-                  y: 0.2
+                  name: 'Gastos',
+                  <?php 
+                    $gasto=$conexion->query("SELECT ifnull(sum(valor),0) as total FROM `tb_gastos` WHERE year(fecha)='2018'");
+                    $respgast=mysqli_fetch_array($gasto);
+                      echo 'y:'.$respgast[0];
+                    ?>
               }]
           }]
       });

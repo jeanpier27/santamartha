@@ -20,10 +20,16 @@ $(document).ready(function(){
 		                  },
 		                success: function(data) {
 		                  // Success message
-		                  // console.log(data);
+		                  console.log(data);
+		                  if(data!=''){
+			                  $('#hora_agendar').html(data);
+			                  $('#aceptar_agenda').removeAttr("disabled");
 
-		                  $('#hora_agendar').html(data);
-		                  $('#aceptar_agenda').removeAttr("disabled");
+		                  }else{
+		                  	// $('#c_carro').css('display','none');
+		                  	$('#aceptar_agenda').attr("disabled",true);
+		                  	$('#hora_agendar').html(data);
+		                  }
 		                  // if (data==='error'){
 
 		                  //   $('#message_agenda_guardar').html("<div class='alert alert-danger'>");
