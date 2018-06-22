@@ -130,7 +130,8 @@ header('location:cerrar_sesion.php');
           $mail->Port=465;
           $mail->Subject="Autoservicio Santa Martha";
           $mail->Body="".$mensaje."";
-          $mail->SetFrom('autoserviciosantamartha@gmail.com','SM');
+          // $mail->SetFrom('autoserviciosantamartha@gmail.com','SM');
+          $mail->SetFrom('autoserviciosantamartha@gmail.com');
           $mail->addAddress($correo);
           if($mail->send()){
             echo("<script>swal({

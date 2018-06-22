@@ -1,3 +1,6 @@
+<?php 
+if(isset($_POST['hola'])){
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +38,8 @@
 
   <body id="page-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <!-- Navigation  -->
+    <nav style="background-color: black" class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Santa Martha</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,16 +95,16 @@
     <section id="somos">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center mb-3">
             <h2 class="section-heading text-uppercase">Quiénes Somos</h2>
           </div>
           <div class="col-md-6 text-center" >
             <h2>Misión</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatibus placeat, iusto repellendus labore dolorem ut ex hic veritatis sint eaque eos aperiam eveniet ipsam error natus, sunt eum doloribus!</p>
+            <p ALIGN="justify">Obtener la satisfacción total de nuestros clientes, al brindarle el mejor servicio general de calidad total en la limpieza de sus autos, por medio del trabajo en equipo, apoyo ágil, trato amable, superando las expectativas del servicio integral, honesto, oportuno y amable.</p>
           </div>
           <div class="col-md-6 text-center">
             <h2>Visión</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatibus placeat, iusto repellendus labore dolorem ut ex hic veritatis sint eaque eos aperiam eveniet ipsam error natus, sunt eum doloribus!</p>
+            <p ALIGN="justify">Ser el primer centro de lavado de gran renombre en la ciudad Naranjal, por la calidad del servicio,  del producto y del tiempo de respuesta, asumiendo así el compromiso con nuestra clientela, poniendo a prueba el alto nivel de nuestro equipo de trabajo.</p>
           </div>
         </div>
       </div>
@@ -503,3 +506,8 @@
   </body>
 
 </html>
+<?php }else{ ?>
+<center>
+<img src="img/mantenimiento.png" alt="">
+</center>
+<?php } ?>

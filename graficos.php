@@ -80,7 +80,7 @@ header('location:cerrar_sesion.php');
   tooltip: {
     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-      '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+      '<td style="padding:0"><b>{point.y:.2f} $</b></td></tr>',
     footerFormat: '</table>',
     shared: true,
     useHTML: true
@@ -107,7 +107,7 @@ header('location:cerrar_sesion.php');
     data: [
     <?php 
     for($i=1;$i<=12;$i++){
-    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018' and month(fecha)='".$i."'");
+    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018' and month(fecha)='".$i."' and estado='ACTIVO'");
     $respvent=mysqli_fetch_array($venta);
       echo $respvent[0].',';
     } ?>
@@ -166,7 +166,7 @@ header('location:cerrar_sesion.php');
               }, {
                   name: 'Ventas',
                    <?php 
-                    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018'");
+                    $venta=$conexion->query("SELECT ifnull(sum(total),0) as total FROM `tb_factura` WHERE year(fecha)='2018' and estado='ACTIVO'");
                     $respvent=mysqli_fetch_array($venta);
                       echo 'y:'.$respvent[0].',';
                      ?>

@@ -65,6 +65,7 @@ header('location:cerrar_sesion.php');
               <th>Fecha</th>
               <th>Clientes</th>
               <th>PDF</th>
+              <th>Anular</th>
             </tr>
           </thead>
           <tbody>
@@ -74,7 +75,7 @@ header('location:cerrar_sesion.php');
               $fecha=$_GET['fecha'];
               $fecha1=substr($fecha, 0, -13);
               $fecha2=substr($fecha, 13);
-              $consul=$conexion->query("SELECT `tb_clientes`.*, `tb_factura`.* FROM `tb_clientes` inner JOIN `tb_factura` ON `tb_factura`.`id_clientes` = `tb_clientes`.`id_clientes` where tb_factura.fecha>='".$fecha1."' and tb_factura.fecha<='".$fecha2."'  order by tb_factura.id_factura desc");
+              $consul=$conexion->query("SELECT `tb_clientes`.*, `tb_factura`.* FROM `tb_clientes` inner JOIN `tb_factura` ON `tb_factura`.`id_clientes` = `tb_clientes`.`id_clientes` where tb_factura.fecha>='".$fecha1."' and tb_factura.fecha<='".$fecha2."' order by tb_factura.id_factura desc");
             }else{
               $consul=$conexion->query("SELECT `tb_clientes`.*, `tb_factura`.* FROM `tb_clientes` inner JOIN `tb_factura` ON `tb_factura`.`id_clientes` = `tb_clientes`.`id_clientes` order by tb_factura.id_factura desc");
             }
@@ -85,10 +86,17 @@ header('location:cerrar_sesion.php');
               <td><?php echo $resp['numero_fact']; ?></td>
               <td><?php echo $resp['fecha']; ?></td>
               <td><?php echo $resp['nombre'].' '.$resp['apellido']; ?></td>
-              <td><span class="pull-right"><a data-toggle="modal" data-target="#editar<?php echo $resp['id_factura']; ?>" href="#editar<?php echo $resp['id_factura']; ?>" style="text-decoration: none;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></span></td>
+              <td>
+                <?php 
+                if($resp['estado']=='ACTIVO'){
+                 ?>                
+                <span class="pull-right"><a data-toggle="modal" data-target="#editar<?php echo $resp['id_factura']; ?>" href="#editar<?php echo $resp['id_factura']; ?>" style="text-decoration: none;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></span>
+                <?php } ?></td>
+              <td><span class="pull-right"><a data-toggle="modal" data-target="#anular<?php echo $resp['id_factura']; ?>" href="#anular<?php echo $resp['id_factura']; ?>" style="text-decoration: none;"><i class="fa fa-ban" aria-hidden="true"></i></a></span></td>
             </tr>
             <?php 
             include('modal_ventas.php');
+            include('modal_anular.php');
             }
              ?>
           </tbody>
