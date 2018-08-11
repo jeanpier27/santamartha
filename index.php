@@ -1,5 +1,5 @@
 <?php 
-if(isset($_POST['hola'])){
+// if(isset($_POST['hola'])){
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -506,8 +506,12 @@ if(isset($_POST['hola'])){
   </body>
 
 </html>
-<?php }else{ ?>
-<center>
+<?php
+//  }else{ 
+   ?>
+<!-- <center>
 <img src="img/mantenimiento.png" alt="">
-</center>
-<?php } ?>
+</center> -->
+<?php 
+// } 
+?>
