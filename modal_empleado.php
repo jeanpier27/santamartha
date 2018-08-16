@@ -20,6 +20,10 @@
                       <input name="nombres" class="form-control" type="text" required="" value="<?php echo $resp['nombres'] ?>">
                     </div>
                     <div class="form-group">
+                      <label for="">Fecha Ingresp:</label>
+                      <input name="fecha" class="form-control" type="date" required="" value="<?php echo $resp['fecha_ing'] ?>">
+                    </div>
+                    <div class="form-group">
                       <label for="">Cargo:</label>
                       <input name="cargo" class="form-control" type="text" value="<?php echo $resp['cargo'] ?>" required="">
                     </div>
@@ -59,6 +63,7 @@
   if(isset($_POST['editar'])){
     $id=$_POST['id'];
     $ruc=$_POST['ruc'];
+    $fecha=$_POST['fecha'];
     $nombres=$_POST['nombres'];
     $cargo=$_POST['cargo'];
     $sueldo=$_POST['sueldo'];
@@ -66,7 +71,7 @@
     $direccion=$_POST['direccion'];
     $estado=$_POST['estado'];
 
-    $resp=$conexion->query("update tb_empleado set cedula='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',cargo='".$cargo."',sueldo='".$sueldo."',estado='".$estado."' where id_empleado=".$id);
+    $resp=$conexion->query("update tb_empleado set cedula='".$ruc."', nombres='".$nombres."',telefono='".$telefono."',direccion='".$direccion."',cargo='".$cargo."',sueldo='".$sueldo."',estado='".$estado."',fecha_ing='".$fecha."' where id_empleado=".$id);
     if($resp){
       echo("<script>swal({
                 title: 'Ok?',

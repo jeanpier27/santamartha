@@ -33,7 +33,7 @@ header('location:cerrar_sesion.php');
 	<div class="container" style="background: #fff; border-radius: 20px;">
     <div class="row">
       <div class="col-md-6">
-        <center><h1>Rol de Pago</h1></center><br>
+        <center><h1>Generar Rol de Pago</h1></center><br>
         <form action="" method="post" id="add_products">
 
         <div class="form-group">

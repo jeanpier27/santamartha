@@ -19,8 +19,11 @@
 	          <a class="dropdown-item" href="ventas.php"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><span class="ml-1">Ventas</span></a>
 	          <?php 
 		        if($_SESSION['acceso']=='ADMINISTRADOR'){
-		         ?>
-	          <a class="dropdown-item" href="rol_pago.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Roles de Pago</span></a>
+						 ?>	          
+						<a class="dropdown-item" href="faltas.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Faltas</span></a>
+						<a class="dropdown-item" href="liquidacion.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Liquidación</span></a>
+						<a class="dropdown-item" href="rol_pago.php"><i class="fa fa-users" aria-hidden="true"></i><span class="ml-1">Roles de Pago</span></a>
+						
 		      <?php } ?>
 	          <a class="dropdown-item" href="servicio.php"><i class="fa fa-car" aria-hidden="true"></i><span class="ml-1">Servicos</span></a>
 	        </div>

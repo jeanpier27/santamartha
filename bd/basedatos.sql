@@ -182,3 +182,9 @@ create table tb_gastos(
   estado varchar(10)
 );
 
+create table tb_faltas(
+  id_faltas int primary key AUTO_INCREMENT,
+  id_empleado int,
+  fecha date,
+  foreign key(id_empleado) references tb_empleado (id_empleado)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

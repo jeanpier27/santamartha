@@ -53,12 +53,16 @@ header('location:cerrar_sesion.php');
                       <input name="nombres" class="form-control" type="text" required="">
                     </div>
                     <div class="form-group">
+                      <label for="">Fecha de ingreso:</label>
+                      <input name="fecha" class="form-control" type="date" required="">
+                    </div>
+                    <div class="form-group">
                       <label for="">Cargo:</label>
                       <input name="cargo" class="form-control" type="text" required="">
                     </div>
                     <div class="form-group">
                       <label for="">Sueldo:</label>
-                      <input name="sueldo" class="form-control" type="text" required="">
+                      <input name="sueldo" class="form-control numero" type="text" required="">
                     </div>
                     <div class="form-group">
                       <label for="">Telefono:</label>
@@ -90,6 +94,7 @@ header('location:cerrar_sesion.php');
                   <th>Id</th>
                   <th>Cedula</th>
                   <th>Nombres</th>
+                  <th>Fecha Ingreso</th>
                   <th>Cargo</th>
                   <th>Sueldo</th>
                   <th>Telefono</th>
@@ -112,6 +117,7 @@ header('location:cerrar_sesion.php');
                 <td><?php echo $resp['id_empleado']; ?></td>
                 <td><?php echo $resp['cedula'] ?></td>
                 <td><?php echo $resp['nombres'] ?></td>
+                <td><?php echo $resp['fecha_ing'] ?></td>
                 <td><?php echo $resp['cargo'] ?></td>
                 <td><?php echo $resp['sueldo'] ?></td>
                 <td><?php echo $resp['telefono'] ?></td>
@@ -134,8 +140,10 @@ header('location:cerrar_sesion.php');
   <script>
     $(document).ready(function(){
        $(".numero").keypress(function(e){
+         
                     var key = window.Event ? e.which : e.keyCode 
-                    return ((key >= 48 && key <= 57) || (key==8) || (key==0)) 
+                    //console.log(key);
+                    return ((key >= 48 && key <= 57) || (key==8) || (key==46)) 
                 });
 
 
