@@ -47,7 +47,11 @@ $(document).ready(function(){
 		                    // $('#message > .alert-success').append($("<strong>").text("Ok registro grabado con exito :)"));
 		                    // $('#message > .alert-success').append('</div>');
 		                    // //clear all fields
-		                    // $('#formulario').trigger("reset");
+												// $('#formulario').trigger("reset");
+												boton.html("Procesando...");
+												boton.removeClass("btn-success");
+												boton.addClass("btn-warning");  
+												boton.attr("disabled",true); 
 		                    location.href='dashboard.php';
 		                  }
 		                },

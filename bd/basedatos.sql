@@ -188,3 +188,13 @@ create table tb_faltas(
   fecha date,
   foreign key(id_empleado) references tb_empleado (id_empleado)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+create table tb_liquidacion(
+  id_liquidacion int primary key AUTO_INCREMENT,
+  id_empleado int,
+  fecha date,
+  decimo_tercero float(10,2),
+  decimo_cuarto float(10,2),
+  vacaciones float(10,2),
+  foreign key(id_empleado) references tb_empleado (id_empleado)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

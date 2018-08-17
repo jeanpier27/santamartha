@@ -1,10 +1,10 @@
 <?php 
-if(isset($_GET['anio'])){
+if(isset($_GET['id'])){
 
 require_once('fpdf/fpdf.php');
 require_once('conexion.php');
-$anio=$_GET['anio'];
-$mes=$_GET['mes'];
+$id=$_GET['id'];
+$fecha=$_GET['fecha'];
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -37,7 +37,7 @@ function Footer()
 $meses=array('','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre');
 $pdf = new PDF('P','mm','A4');
 $pdf->AliasNbPages();
-$emple=$conexion->query("SELECT `tb_empleado`.*, `tb_rol_empleado`.* FROM `tb_empleado` inner JOIN `tb_rol_empleado` ON `tb_rol_empleado`.`id_empleado` = `tb_empleado`.`id_empleado` where tb_rol_empleado.anio='".$anio."' and tb_rol_empleado.mes='".$mes."' and estado='ACTIVO'");
+$emple=$conexion->query("SELECT `tb_empleado`.*, `tb_liquidacion`.* FROM `tb_empleado` inner JOIN `tb_liquidacion` ON `tb_liquidacion`.`id_empleado` = `tb_empleado`.`id_empleado` where tb_liquidacion.id_empleado='".$id."' and tb_liquidacion.fecha='".$fecha."' ");
 while($detf=mysqli_fetch_array($emple)){
 $iess=9.45;
 $total=0;
@@ -49,9 +49,7 @@ $pdf->SetXY(55,30);
 $pdf->Cell(0,10,'AUTOSERVICIO SANTA MARTHA',0,1);
 $pdf->SetFont('Times','B',12);
 $pdf->SetXY(10,40);
-$pdf->Cell(0,10,'Rol de Pagos',0,1);
-$pdf->SetXY(130,40);
-$pdf->Cell(0,10,'Periodo: '.$meses[($mes*1)].' del '.$anio,0,1);
+$pdf->Cell(0,10,utf8_decode('LIQUIDACIÓN'),0,1);
 $pdf->SetFont('Times','B',14);
 $pdf->Line(10,50, 190, 50);
 $pdf->Line(10,80, 190, 80);
@@ -61,54 +59,32 @@ $pdf->SetXY(10,60);
 $pdf->Cell(0,10,'Cedula: '.$detf['cedula'],0,1);
 $pdf->SetXY(10,70);
 $pdf->Cell(0,10,'Cargo: '.$detf['cargo'],0,1);
-$pdf->SetXY(15,90);
-$pdf->Cell(85,10,'Ingresos',1,1,'C');
-$pdf->SetXY(100,90);
-$pdf->Cell(85,10,'Egresos',1,1,'C');
-$pdf->Line(15,90, 15, 180);
-$pdf->Line(100,100, 100, 180);
-$pdf->Line(185,100, 185, 180);
-$pdf->Line(15,180, 185, 180);
+// $pdf->SetXY(15,90);
+// $pdf->Cell(85,10,'Ingresos',1,1,'C');
+// $pdf->SetXY(100,90);
+// $pdf->Cell(85,10,'Egresos',1,1,'C');
+// $pdf->Line(15,90, 15, 180);
+// $pdf->Line(100,100, 100, 180);
+// $pdf->Line(185,100, 185, 180);
+// $pdf->Line(15,180, 185, 180);
 $pdf->SetFont('Times','',10);
-$pdf->SetXY(15,100);
-$pdf->Cell(35,10,'Sueldo Mensual',0,1);
-$pdf->SetXY(65,100);
-$pdf->Cell(35,10,'$'.$detf['sueldo'],0,1,'R');
-$pdf->SetXY(100,100);
-$pdf->Cell(35,10,'Aporte IESS',0,1);
-$pdf->SetXY(150,100);
-$sub=($detf['sueldo']*($iess*0.01));
-$pdf->Cell(35,10,'$'.number_format($sub,2),0,1,'R');
-$pdf->Line(100,109, 185, 109);
-$pdf->SetXY(100,115);
+// $pdf->SetXY(15,100);
+// $pdf->Cell(35,10,'Sueldo Mensual',0,1);
+// $pdf->SetXY(65,100);
+// $pdf->Cell(35,10,'$'.$detf['sueldo'],0,1,'R');
+// $pdf->SetXY(100,100);
+// $pdf->Cell(35,10,'Aporte IESS',0,1);
+// $pdf->SetXY(150,100);
+// $sub=($detf['sueldo']*($iess*0.01));
+// $pdf->Cell(35,10,'$'.number_format($sub,2),0,1,'R');
+// $pdf->Line(100,109, 185, 109);
+// $pdf->SetXY(100,115);
 // $pdf->Cell(35,7,'Faltas',1,1);
-$faltas=$conexion->query("select * from tb_faltas where id_empleado=".$detf['id_empleado']);
-$dias=mysqli_num_rows($faltas);
-while($falt=mysqli_fetch_array($faltas)){
-    $pdf->SetX(100);
-    $pdf->Cell(35,6,$falt['fecha'],0,1);
-}
-$descuento=($detf['sueldo']/30)*$dias;
-$pdf->SetXY(100,109);
-$pdf->Cell(35,7,'Faltas',0,1);
-$pdf->SetXY(150,109);
-$pdf->Cell(35,10,'$'.number_format($descuento,2),0,1,'R');
 $pdf->SetFont('Times','B',16);
-if($descuento==0){
-    $total=$detf['sueldo']-$sub;
-}else{
-    $total=$detf['sueldo']-($sub+$descuento);
-}
-
-$pdf->SetXY(130,190);
-$pdf->Cell(35,10,'Total $'.number_format($total,2),0,0);
 $pdf->SetXY(80,220);
 $pdf->Cell(55,0,'',1,1);
-// $pdf->SetXY(0,220);
 $pdf->Cell(0,10,'Recibi conforme',0,1,'C');
-// $pdf->SetXY(90,230);
 $pdf->Cell(0,10,$detf['nombres'],0,1,'C');
-// $pdf->SetXY(90,240);
 $pdf->Cell(0,10,$detf['cedula'],0,1,'C');
 
 }
