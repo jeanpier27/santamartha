@@ -37,7 +37,7 @@ function Footer()
 $meses=array('','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre');
 $pdf = new PDF('P','mm','A4');
 $pdf->AliasNbPages();
-$emple=$conexion->query("SELECT `tb_empleado`.*, `tb_rol_empleado`.* FROM `tb_empleado` inner JOIN `tb_rol_empleado` ON `tb_rol_empleado`.`id_empleado` = `tb_empleado`.`id_empleado` where tb_rol_empleado.anio='".$anio."' and tb_rol_empleado.mes='".$mes."' and estado='ACTIVO'");
+$emple=$conexion->query("SELECT `tb_empleado`.*, `tb_rol_empleado`.* FROM `tb_empleado` inner JOIN `tb_rol_empleado` ON `tb_rol_empleado`.`id_empleado` = `tb_empleado`.`id_empleado` where tb_rol_empleado.anio='".$anio."' and tb_rol_empleado.mes='".$mes."' ");
 while($detf=mysqli_fetch_array($emple)){
 $iess=9.45;
 $total=0;
