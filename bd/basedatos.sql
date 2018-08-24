@@ -1,6 +1,6 @@
-drop DATABASE IF EXISTS autoserv;
-CREATE DATABASE autoserv;
-use autoserv;
+drop DATABASE IF EXISTS autoserv2;
+CREATE DATABASE autoserv2;
+use autoserv2;
 -- user admin
 -- password autoserv2017
 
@@ -14,12 +14,12 @@ CREATE TABLE tb_clientes (
   correo varchar(100),
   estado varchar(10),
   observacion text
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE tb_categoria (
   id_categoria int primary key AUTO_INCREMENT ,
   categoria text
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE tb_producto (
   id_producto int primary key AUTO_INCREMENT ,
@@ -32,7 +32,7 @@ CREATE TABLE tb_producto (
   estado varchar(10),
   observacion text,
   foreign key(id_categoria) references tb_categoria (id_categoria)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_proveedores(
   id_proveedores int primary key AUTO_INCREMENT ,
@@ -42,7 +42,7 @@ create table tb_proveedores(
   direccion varchar(100),
   correo varchar(50),
   observacion text
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- alter table tb_ventas agregar iva
 -- add iva float(10,2)
@@ -57,7 +57,7 @@ create table tb_compras(
   observacion text,
   iva float(10,2),
   foreign key(id_proveedores) references tb_proveedores (id_proveedores)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_detalle_compras(
   id_detalle_compras int primary key AUTO_INCREMENT ,
@@ -68,7 +68,7 @@ create table tb_detalle_compras(
   valor_c float(10,2),
   foreign key(id_compras) references tb_compras (id_compras),
   foreign key(id_producto) references tb_producto (id_producto)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_factura(
   id_factura int primary key AUTO_INCREMENT ,
@@ -81,7 +81,7 @@ create table tb_factura(
   estado varchar(10),
   observacion text,
   foreign key(id_clientes) references tb_clientes (id_clientes)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ELIMINAR TABLA
 -- create table tb_ventas(
@@ -103,54 +103,7 @@ create table tb_detalle_ventas(
   observacion text,
   foreign key(id_factura) references tb_factura (id_factura),
   foreign key(id_producto) references tb_producto (id_producto)
-);
-
-create table tb_detalle_servicio(
-  id_detalle_servicio int primary key AUTO_INCREMENT ,
-  id_factura int,
-  id_empleado int,
-  observacion text,
-  foreign key(id_factura) references tb_factura (id_factura),
-  foreign key(id_empleado) references tb_empleado (id_empleado)
-);
-
-CREATE TABLE tb_mensajes (
-  id_mensaje int primary key AUTO_INCREMENT ,
-  nombre text,
-  telefono varchar(10) NOT NULL,
-  correo varchar(25),
-  mensaje text,
-  verificacion int,
-  fecha timestamp
-);
-
-CREATE TABLE tb_agenda (
-  id_agenda int primary key AUTO_INCREMENT ,
-  servicio text,
-  id_clientes int,
-  fecha_inicio datetime,
-  fecha_fin datetime,
-  fecha timestamp,
-  estado varchar(10);
-  foreign key(id_clientes) references tb_clientes (id_clientes)
-);
-
-CREATE TABLE tb_usuarios (
-  id_usuarios int primary key AUTO_INCREMENT ,
-  nombres text,
-  cargo varchar(100),
-  usuario varchar(100),
-  password text,
-  acceso varchar(20),
-  estado varchar(10)
-);
-
-CREATE TABLE tb_promocion (
-  id_promocion int primary key AUTO_INCREMENT ,
-  imagen text,
-  titulo varchar(100),
-  descripcion varchar(100)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_empleado(
   id_empleado int primary key AUTO_INCREMENT ,
@@ -161,7 +114,56 @@ create table tb_empleado(
   cargo varchar(50),
   sueldo float(10,2),
   estado varchar(10)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+create table tb_detalle_servicio(
+  id_detalle_servicio int primary key AUTO_INCREMENT ,
+  id_factura int,
+  id_empleado int,
+  observacion text,
+  foreign key(id_factura) references tb_factura (id_factura),
+  foreign key(id_empleado) references tb_empleado (id_empleado)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE tb_mensajes (
+  id_mensaje int primary key AUTO_INCREMENT ,
+  nombre text,
+  telefono varchar(10) NOT NULL,
+  correo varchar(25),
+  mensaje text,
+  verificacion int,
+  fecha timestamp
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE tb_agenda (
+  id_agenda int primary key AUTO_INCREMENT ,
+  servicio text,
+  id_clientes int,
+  fecha_inicio datetime,
+  fecha_fin datetime,
+  fecha timestamp,
+  estado varchar(10),
+  foreign key(id_clientes) references tb_clientes (id_clientes)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE tb_usuarios (
+  id_usuarios int primary key AUTO_INCREMENT ,
+  nombres text,
+  cargo varchar(100),
+  usuario varchar(100),
+  password text,
+  acceso varchar(20),
+  estado varchar(10)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE tb_promocion (
+  id_promocion int primary key AUTO_INCREMENT ,
+  imagen text,
+  titulo varchar(100),
+  descripcion varchar(100)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 
 create table tb_rol_empleado(
   id_rol_pago int primary key AUTO_INCREMENT,
@@ -171,7 +173,7 @@ create table tb_rol_empleado(
   valor float(10,2),
   estado varchar(10),
   foreign key(id_empleado) references tb_empleado (id_empleado)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_gastos(
   id_gastos int primary key AUTO_INCREMENT ,
@@ -180,7 +182,7 @@ create table tb_gastos(
   descripcion varchar(100),
   valor float(10,2),
   estado varchar(10)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table tb_faltas(
   id_faltas int primary key AUTO_INCREMENT,
