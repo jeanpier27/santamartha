@@ -39,6 +39,10 @@ header('location:cerrar_sesion.php');
       <div class="col-md-12">
         <div id="container_pie"></div>
       </div>
+      <div class="col-12 my-3"><center><h1>Cantidad De Servicios Ofrecidos</h1></center></div>
+      <div class="col-md-12 my-3">
+        <div id="container_line2"></div>
+      </div>
     </div>
 	</div>
   <script>
@@ -182,6 +186,99 @@ header('location:cerrar_sesion.php');
               }]
           }]
       });
+
+       Highcharts.chart('container_line2', {
+            chart: {
+              type: 'column'
+            },
+            title: {
+              text: 'Cantidad de Servicios'
+            },
+            subtitle: {
+              text: 'autoserviciosantamartha.com'
+            },
+            xAxis: {
+              categories: [
+                'Ene',
+                'Feb',
+                'Mar',
+                'Abr',
+                'May',
+                'Jun',
+                'Jul',
+                'Ago',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dic'
+              ],
+              crosshair: true
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: 'Santa Martha'
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.f} </b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+            },
+            plotOptions: {
+              column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+              }
+            },
+            series: [{
+              name: 'Lavado de motos',
+              data:[ 
+              <?php 
+              require_once('conexion.php');
+              for($i=1;$i<=12;$i++){
+              $compra=$conexion->query("SELECT ifnull(count(*),0) as total FROM `tb_agenda` WHERE year(fecha_inicio)='2018' and month(fecha_inicio)='".$i."' and estado='PAGADO' and servicio='Lavada de moto'");
+              $respcomp=mysqli_fetch_array($compra);
+                echo $respcomp[0].',';
+              } ?>
+              ]
+            }, {
+              name: 'Lavado de carros',
+              data: [
+              <?php 
+              for($i=1;$i<=12;$i++){
+              $venta=$conexion->query("SELECT ifnull(count(*),0) as total FROM `tb_agenda` WHERE year(fecha_inicio)='2018' and month(fecha_inicio)='".$i."' and estado='PAGADO' and servicio<>'Lavada de moto' and servicio<>'Cambio de aceite' and servicio<>'Cambio de filtro' ");
+              $respvent=mysqli_fetch_array($venta);
+                echo $respvent[0].',';
+              } ?>
+              ]
+            }, {
+              name: 'Cambio de Aceite',
+              data: [
+              <?php 
+              for($i=1;$i<=12;$i++){
+              $gasto=$conexion->query("SELECT ifnull(count(*),0) as total FROM `tb_agenda` WHERE year(fecha_inicio)='2018' and month(fecha_inicio)='".$i."' and estado='PAGADO' and servicio='Cambio de aceite'");
+              $respgast=mysqli_fetch_array($gasto);
+                echo $respgast[0].',';
+              } ?>
+              ]
+
+            }, {
+              name: 'Cambio de Filtro',
+              data: [
+              <?php 
+              for($i=1;$i<=12;$i++){
+              $gasto=$conexion->query("SELECT ifnull(count(*),0) as total FROM `tb_agenda` WHERE year(fecha_inicio)='2018' and month(fecha_inicio)='".$i."' and estado='PAGADO' and servicio='Cambio de filtro'");
+              $respgast=mysqli_fetch_array($gasto);
+                echo $respgast[0].',';
+              } ?>
+              ]
+
+            }]
+          });
 
     });
   </script>

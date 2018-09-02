@@ -69,6 +69,7 @@ header('location:cerrar_sesion.php');
 	          start: "<?php echo $resp_dias['fecha_inicio']; ?>",
 	          end: '<?php echo $resp_dias['fecha_fin']; ?>',
             url: "<?php echo $resp_dias['id_agenda']; ?>",
+            class:'<?php echo $resp_dias['servicio']; ?>',
             color:<?php if($resp_dias['estado']=='ACTIVO'){ ?> '#3498db' <?php }elseif ($resp_dias['estado']=='PAGADO') { ?> '#2ecc71' <?php }elseif ($resp_dias['estado']=='ANULADO') {?> '#e74c3c' <?php } ?>
 	        },
       	
@@ -107,6 +108,15 @@ header('location:cerrar_sesion.php');
                   }else{
                     $('#exampleModal').modal("show");
                     $('#id_agenda').val(event.url);
+                    var ser=event.class;
+                    if(ser=='Cambio de aceite' ){
+                      $('#valor').val(15.00);
+                      // $('#valor').attr('readonly',true);
+                    }
+                    if(ser=='Cambio de filtro'){
+                      $('#valor').val(10.00);
+                      // $('#valor').attr('readonly',true);
+                    }
                     
                   }
                 }
@@ -177,7 +187,7 @@ header('location:cerrar_sesion.php');
         </div>
         <div class="form-group">
           <label for="">Valor</label>
-          <input type="text" name="valor" class="form-control">
+          <input type="text" name="valor" id="valor" class="form-control">
         </div>
       </div>
       <div class="modal-footer">

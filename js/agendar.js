@@ -2,7 +2,10 @@ $(document).ready(function(){
 	$('#form_agendar').submit(function(e){
 		e.preventDefault();
 		var cedula=$('#cedula_agendar').val();
-		var servicio=$('#servicio').val()+' '+$('#carro').val();
+		var servicio=$('#servicio').val();
+		if(servicio==='Lavada de carro'){
+			 servicio=servicio+' '+$('#carro').val();
+		}
 	    var fecha=$('#fecha_agendar').val();
 	    var hora=$('#hora_agendar').val();
 	    var boton=$('#aceptar_agenda');	    
