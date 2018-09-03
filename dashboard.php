@@ -110,11 +110,11 @@ header('location:cerrar_sesion.php');
                     $('#id_agenda').val(event.url);
                     var ser=event.class;
                     if(ser=='Cambio de aceite' ){
-                      $('#valor').val(15.00);
+                      $('#valor').val(20.00);
                       // $('#valor').attr('readonly',true);
                     }
                     if(ser=='Cambio de filtro'){
-                      $('#valor').val(10.00);
+                      $('#valor').val(16.00);
                       // $('#valor').attr('readonly',true);
                     }
                     

@@ -221,8 +221,8 @@
                         <select class="form-control" name="servicio" id="servicio">
                           <option value="Lavada de moto">Lavada de moto</option>
                           <option value="Lavada de carro">Lavada de carro</option>        
-                          <option value="Cambio de aceite">Cambio de aceite $15.00</option> 
-                          <option value="Cambio de filtro">Cambio de filtro $10.00</option> 
+                          <option value="Cambio de aceite">Cambio de aceite $20.00</option> 
+                          <option value="Cambio de filtro">Cambio de filtro $16.00</option> 
                         </select>
                       </div>
                       <div class="form-group" id="c_carro" style="display:none;">

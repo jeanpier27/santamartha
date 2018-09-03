@@ -26,42 +26,42 @@ $(document).ready(function(){
 		                  },
 		                success: function(data) {
 		                  // Success message
-		                  // console.log(parseInt(data));
+		                  console.log(parseInt(data));
 		                  if(data==='rep'){
 		                  	swal({
-							  position: 'center',
-							  type: 'warning',
-							  title: 'Ya se encuentra registrada esta factura',
-							  showConfirmButton: false,
-							  timer: 3500
-							})
+													position: 'center',
+													type: 'warning',
+													title: 'Ya se encuentra registrada esta factura',
+													showConfirmButton: false,
+													timer: 3500
+												})
 		                  }
 		                  if(data==='error'){
 		                  	swal({
-							  position: 'center',
-							  type: 'error',
-							  title: 'Ah ocurrido un error intente de nuevo :(',
-							  showConfirmButton: false,
-							  timer: 3500
-							})
+													position: 'center',
+													type: 'error',
+													title: 'Ah ocurrido un error intente de nuevo :(',
+													showConfirmButton: false,
+													timer: 3500
+												})
 		                  }
 		                  if(parseInt(data)>0){
 		                  	swal({
-							  title: 'Ok?',
-							  text: "Registro grabado con exito :)",
-							  type: 'success',
-							  showCancelButton: true,
-							  confirmButtonColor: '#3085d6',
-							  // cancelButtonColor: '#d33',
-							  showCancelButton: false,
-							  confirmButtonText: 'Aceptar',
-							  allowOutsideClick:false,
-							}).then((result) => {
-							  if (result.value) {
-							  	window.open('factura.php?id_fact='+data+'', '_blank');
-							    location.href = 'ventas.php';
-							  }
-							})
+													title: 'Ok?',
+													text: "Registro grabado con exito :)",
+													type: 'success',
+													showCancelButton: true,
+													confirmButtonColor: '#3085d6',
+													// cancelButtonColor: '#d33',
+													showCancelButton: false,
+													confirmButtonText: 'Aceptar',
+													allowOutsideClick:false,
+												}).then((result) => {
+													if (result.value) {
+														window.open('factura.php?id_fact='+data+'', '_blank');
+														location.href = 'ventas.php';
+													}
+												})
 		                  }
 		                  // if (data==='error'){
 
@@ -100,12 +100,12 @@ $(document).ready(function(){
 		                  // $('#contactForm').trigger("reset");
 		                  // limpiar_msg_registro();
 		                  swal({
-							  position: 'center',
-							  type: 'error',
-							  title: 'Ah ocurrido un error intente de nuevo :(',
-							  showConfirmButton: false,
-							  timer: 3500
-							})
+												position: 'center',
+												type: 'error',
+												title: 'Ah ocurrido un error intente de nuevo :(',
+												showConfirmButton: false,
+												timer: 3500
+											})
 
 		                },
 		                complete: function() {

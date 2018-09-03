@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id_fact'])){
-
+error_reporting(0);
 require_once('fpdf/fpdf.php');
 require_once('conexion.php');
 $id_fact=$_GET['id_fact'];
